@@ -14,7 +14,7 @@
     <div class="flex-container city_time">
         
             <div class="city_selector">
-                <img src="assests/icons/city-icons/kolkata.svg">   
+                <img src="assests/icons/city-icons/kolkata.svg" alt="City Icon">   
                 <input list="cities" name="city" id="city" placeholder="select a city">
                     <datalist id="cities">
                         <option value="Kolkata">
@@ -27,9 +27,9 @@
 
             <div class="time_date">
                 <div class="time">
-                    <p></p><span id="hr_min">10 : 10 </span>
-                    <span id="seconds"> : 44</span>
-                    <img class="am_pm" src="/assests/icons/general-icons/amState.svg"></p>
+                    <p><span id="hr_min">10 &colon; 10 </span>
+                    <span id="seconds"> &colon; 44</span>
+                    <img class="am_pm" src="/assests/icons/general-icons/amState.svg" alt="AM/PM Icon"></p>
                 </div>
                 <div class="date">
                     <span>01-Mar-2020</span>
@@ -38,18 +38,26 @@
             
     </div>
 
-    <div class="flex-container weather_details">
-            <div class="temp_cel">
-            
+    <div class="weather_details">
+            <div class="weather temp_cel">
+                <h2>Temp &deg; C</h2>
+                <h2><strong>25 C</strong></h2>
             </div>
-            <div class="temp_fah">
-                
+            <div class="weather humidity">
+                <span>
+                <h2>Humidity</h2>
+                <h2><strong>26</strong>%</h2>
+                </span>
             </div>
-            <div class="humidity">
             
+            <div class="weather temp_fah">
+                <h2>Temp F</h2>
+                <h2><strong>78 F</strong></h2>
             </div>
-            <div class="precipitation">
-            
+            <div class="weather precipitation">
+                <span></span>
+                <h2>Precipitation</h2>
+                <h2><strong>0</strong>%</h2>
             </div>
     </div>
 
