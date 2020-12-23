@@ -1,6 +1,6 @@
 .grid-container {
     display:grid;
-    grid-template: auto / 30% 20% 1fr;
+    grid-template: auto / 30% 25% 1fr;
     grid-gap: 0.8em;
     
 }
@@ -100,9 +100,23 @@
 }
 
 .weather{
-    padding: 0.1rem 0.3rem 0.1rem 0.5rem;
+    padding: 0.1rem 1rem 0.1rem 1rem;
+    position:relative;
+    justify-content: space-between;
+    
 }
 
 .humidity, .precipitation {
-    border-left: 1px dotted var(--primary-white);
+    padding-left: 1.7rem;
+}
+
+
+.humidity::before , .precipitation::before{
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 20%;
+    height: 80px;
+    border-left: 0.1rem dotted var(--secondary-white);
+    
 }
