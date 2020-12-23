@@ -11,27 +11,52 @@
 <body>
     
 <div class="top grid-container">
-    <div class="city-selector">
-                   
-    </div>
-    <div class="time-date">
-       
-    </div>
-    <div class="temp-cel">
-       
-    </div>
-    <div class="temp-fah">
+    <div class="flex-container city_time">
         
+            <div class="city_selector">
+                <img src="assests/icons/city-icons/kolkata.svg">   
+                <input list="cities" name="city" id="city" placeholder="select a city">
+                    <datalist id="cities">
+                        <option value="Kolkata">
+                        <option value="Moscow">
+                        <option value="London">
+                        <option value="Newyork">
+                        <option value="Bangkok">
+                    </datalist>           
+            </div>
+
+            <div class="time_date">
+                <div class="time">
+                    <p></p><span id="hr_min">10 : 10 </span>
+                    <span id="seconds"> : 44</span>
+                    <img class="am_pm" src="/assests/icons/general-icons/amState.svg"></p>
+                </div>
+                <div class="date">
+                    <span>01-Mar-2020</span>
+                </div>
+            </div>
+            
     </div>
-    <div class="humidity">
-       
+
+    <div class="flex-container weather_details">
+            <div class="temp_cel">
+            
+            </div>
+            <div class="temp_fah">
+                
+            </div>
+            <div class="humidity">
+            
+            </div>
+            <div class="precipitation">
+            
+            </div>
     </div>
-    <div class="precipitation">
-       
-    </div>
+
     <div class="timeline">
        
     </div>
+
 </div>
 
     
