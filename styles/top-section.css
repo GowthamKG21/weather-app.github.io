@@ -52,10 +52,9 @@
     font-size: 2.5rem;
     outline: none;
     max-height: 5rem;
-    
     padding: 1rem;
     margin-left: 1rem;
-    align-self: center;
+    
    
 }
 
@@ -98,13 +97,14 @@
     grid-template-columns: auto auto;
     color: var(--primary-white);
     font-size: 80%;
-    padding: 1rem;
+    
 }
 
 .weather{
     padding: 0.1rem 1rem 0.1rem 1rem;
     position:relative;
     justify-content: space-between;
+    align-content: center;
     
 }
 
@@ -132,10 +132,11 @@
 .timeline_hr_container {
     display: grid;
     grid-template-columns: auto auto;
-    grid-template-rows: 1fr 1fr 1.4fr 1fr;
+    grid-template-rows: 1fr 1fr 1.2fr 1fr;
     width: 8rem;
     align-content: center;
-    grid-row-gap: 0.5rem;
+    grid-row-gap: 0.1rem;
+    padding: 2rem 0;
     color: var(--primary-white);
 }
 
@@ -186,7 +187,7 @@
     max-width: 10rem;
 }
 .city_icon {
-    width : 3rem;
+    width : 4rem;
 }
 
 .city_list>input {
@@ -232,3 +233,39 @@
 .timeline_hr_container {
     width: 7rem;
 }   
+
+
+@media only screen and (max-width: 1035px) {
+
+    .top_section {
+        grid-template: auto auto auto / auto;
+    }
+    
+    .timeline {
+        font-size: 0.7rem;
+    } 
+    
+    .timeline_hr_container {
+        width: 6rem;
+    }   
+    
+@media only screen and (max-width: 600px) {
+
+    .city_time {
+        grid-template: auto auto / auto ;
+    }
+    .time_date {
+        flex-direction: row;
+        justify-content: space-around;
+    }
+    .city-selector{
+        display: flex;
+        justify-content: space-around;
+    }
+    
+    .city_list>input {
+        font-size: 2rem;
+        padding: 0.5rem;
+    }
+
+}    
