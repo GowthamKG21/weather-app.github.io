@@ -9,8 +9,9 @@ body{
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;   /* edge cropped */
-
+    
     font-family: 'Roboto', sans-serif;
     font-weight: 100;
+    margin: 0;
 }
 
