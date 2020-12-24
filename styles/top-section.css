@@ -97,6 +97,7 @@
     grid-template-columns: auto auto;
     color: var(--primary-white);
     font-size: 80%;
+    align-items: center;
     
 }
 
@@ -167,7 +168,7 @@
 }
 
 
-@media only screen and (max-width: 1200px) {
+@media only screen and (max-width: 1310px) {
 
 .top_section {
     display:grid;
@@ -233,6 +234,7 @@
 .timeline_hr_container {
     width: 7rem;
 }   
+
 
 
 @media only screen and (max-width: 1035px) {
