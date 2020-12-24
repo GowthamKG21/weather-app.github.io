@@ -1,3 +1,6 @@
+/* For LARGE SCREENS Laptops */
+
+/*Entire Top Section*/
 .top_section {
     display:grid;
     grid-template: auto / auto auto auto;
@@ -10,6 +13,7 @@
    
 }
 
+/* Module 1: City Selector Time and Date display*/
 .city_time{
     display: grid;
     grid-template-rows: 1fr 1.5fr;
@@ -22,26 +26,21 @@
     flex-direction: column;
     flex-wrap: wrap;
     align-items: center;
-    justify-content: center;
-    
-    
+    justify-content: center;   
 }
+
 .city_selector {
     display: flex;
     max-width:100%;
-    
 }
 
 .city_icon {
     width: 5rem;
-
 }
+
 .city_icon > img{
     max-width: 100%;
-
-    
 }
-
 
 .city_list>input {
     max-width: 15rem;
@@ -55,7 +54,6 @@
     padding: 1rem;
     margin-left: 1rem;
     
-   
 }
 
 .city_list::-webkit-calendar-picker-indicator {
@@ -66,8 +64,7 @@
 
 .time{
     color: var(--pale-yellow-text);
-    justify-content: center;
-    
+    justify-content: center;   
 }
 
 #hr_min{
@@ -92,10 +89,17 @@
    
 }
 
+
+/* Module:2  Main Weather Report of Selected City*/
+
 .weather_details{
     display: grid;
     grid-template-columns: auto auto;
     color: var(--primary-white);
+    /*
+    font-family: 'Roboto';  
+    font-weight: 100;  
+    */
     font-size: 80%;
     align-items: center;
     
@@ -109,9 +113,6 @@
     
 }
 
-
-
-
 .humidity::before , .precipitation::before{
     content: "";
     position: absolute;
@@ -122,6 +123,8 @@
     
 }
 
+/* Module:3 Hourly Weather Report*/
+
 .timeline {
     display: flex;
     flex-direction: row;
@@ -130,6 +133,7 @@
     font-weight: 100;
     
 }
+
 .timeline_hr_container {
     display: grid;
     grid-template-columns: auto auto;
@@ -167,6 +171,7 @@
     grid-area: 2/2/3/3;
 }
 
+/*For SMALL SCREEN Laptops*/
 
 @media only screen and (max-width: 1310px) {
 
@@ -236,6 +241,7 @@
 }   
 
 
+/*For Tablets and Large phones*/
 
 @media only screen and (max-width: 1035px) {
 
@@ -251,6 +257,9 @@
         width: 6rem;
     }   
     
+
+/*For Small Screen mobile phones*/
+
 @media only screen and (max-width: 600px) {
 
     .city_time {
