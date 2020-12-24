@@ -40,10 +40,3 @@
     src: url('../fonts/Roboto/Roboto-Bold.ttf') format('truetype');
 }
 
-/* roboto-black */
-@font-face {
-    font-family: 'Roboto';
-    font-style: normal;
-    font-weight: 900;
-    src: url('../fonts/Roboto/Roboto-Black.ttf') format('truetype');
-}
