@@ -1,0 +1,6 @@
+.middle_section{
+    background-color: var(--primary-black);
+    border-radius: 60px 60px;
+    min-height: calc(100vh - 0px);
+    
+}
