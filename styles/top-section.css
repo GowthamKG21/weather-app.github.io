@@ -3,19 +3,18 @@
 /*Entire Top Section*/
 .top_section {
     display:grid;
-    grid-template: auto / auto auto auto;
+    grid-template-areas:"city_time weather_details timeline";
     grid-gap: 0.8em;
-    font-weight: 100;
-    background-color: rgba(7, 7, 7, 0.3);
     padding: 1.2rem 0;
 }
 
 /* Module 1: City Selector Time and Date display*/
 .city_time{
+    grid-area: city_time;
     display: grid;
-    grid-template-rows: 1fr 1.5fr;
-    grid-column-gap: 1rem;
+    grid-template-rows: auto auto;
     align-items: center;
+    
 }
 
 .time_date {
@@ -23,11 +22,14 @@
     flex-direction: column;
     flex-wrap: wrap;
     align-items: center;
-    justify-content: center;   
+    justify-items: center;   
+    white-space: nowrap;
 }
 
 .city_selector {
     display: flex;
+    flex-direction: row;
+    justify-content: center;
     max-width:100%;
 }
 
@@ -41,16 +43,16 @@
 
 .city_list>input {
     max-width: 15rem;
+    max-height: 5rem;
     background-color: var(--bg-input-box);
     border: none;
-    color: var(--primary-white);
-    cursor: pointer;
-    font-size: 2.5rem;
     outline: none;
-    max-height: 5rem;
+    cursor: pointer;
+    color: var(--primary-white);
+    font-weight: 100;
+    font-size: 2.5rem;
     padding: 1rem;
     margin-left: 1rem;
-    
 }
 
 .city_list::-webkit-calendar-picker-indicator {
@@ -60,8 +62,7 @@
 }
 
 .time{
-    color: var(--pale-yellow-text);
-    justify-content: center;   
+    color: var(--pale-yellow-text); 
 }
 
 #hr_min{
@@ -81,40 +82,32 @@
 }
 
 .date{
-    color: var(--primary-white);
     font-size: 1.8rem;
-   
 }
 
 
 /* Module:2  Main Weather Report of Selected City*/
 
 .weather_details{
+    grid-area: weather_details;
     display: grid;
     grid-template-columns: auto auto;
-    color: var(--primary-white);
-    /*
-    font-family: 'Roboto';  
-    font-weight: 100;  
-    */
-    font-size: 80%;
     align-items: center;
-    
+    font-size: 2rem;
+    font-weight: 100;
 }
 
 .weather{
     padding: 0.1rem 1rem 0.1rem 1rem;
     position:relative;
-    justify-content: space-between;
-    align-content: center;
-    
+    white-space: nowrap;
 }
 
 .humidity::before , .precipitation::before{
     content: "";
     position: absolute;
     left: 0;
-    top: 20%;
+    top: 5%;
     height: 80px;
     border-left: 0.1rem dotted var(--secondary-white);
     
@@ -123,128 +116,137 @@
 /* Module:3 Hourly Weather Report*/
 
 .timeline {
+    grid-area: timeline;
     display: flex;
     flex-direction: row;
-    font-size: 0.75rem;
+    text-align: center;
     font-family: 'Roboto';
     font-weight: 100;
-    
+    font-size: 1.3rem;    
+    overflow: hidden;
 }
 
 .timeline_hr_container {
     display: grid;
-    grid-template-columns: auto auto;
-    grid-template-rows: 1fr 1fr 1.2fr 1fr;
-    width: 8rem;
-    align-content: center;
+    grid-template-columns: 6rem 2rem;
+    grid-template-rows: 2rem 2rem 3.5rem 1.5rem;
+    grid-template-areas:"hr ."
+                        "in sep"
+                        "ic ."
+                        "val ." ;
     grid-row-gap: 0.1rem;
-    
-    color: var(--primary-white);
+    align-content: center;
+    justify-items: center;
+    align-items: center;
+    justify-items: center;
 }
 
-.w{
-    width:100%;
-    text-align: center;
-}
+
 .w_hr {
-    grid-area: 1/1/2/2;
+    grid-area: hr;
 }
 .w_indicator {
-    grid-area: 2/1/3/2;
+    grid-area: in;
+    font-weight: bold;
 }
 .w_icon {
-    grid-area: 3/1/4/2;
-    display: flex;
-    width: 75%;
-    padding-left: 1rem;
-    flex-direction: column;
-    justify-content: center;   /*NOT CENTERED*/
-    
+    grid-area: ic;
+    width: 3rem;
 }
 .w_value {
-    grid-area: 4/1/5/2;
+    grid-area: val;
+    font-weight:normal;
 }
-.time_separator {
-    grid-area: 2/2/3/3;
+.w_time_separator {
+    grid-area: sep;
 }
+
 
 /*For SMALL SCREEN Laptops*/
 
 @media only screen and (max-width: 1310px) {
 
-.top_section {
-    display:grid;
-    grid-template: auto / auto auto;
-    grid-gap: 0;
+    .top_section {
+        display:grid;
+        grid-template-areas: "city_time weather_details" 
+                             "timeline timeline";
+        row-gap: 1rem;
+        
+    }
+
+    .city_time{
+        display: grid;
+        grid-template-columns:auto auto;
+        grid-template-rows: auto;
+        grid-column-gap: 0;
+    }
+
+    .city-selector {
+        max-width: 10rem;
+    }
+    .city_icon {
+        width : 4rem;
+    }
+
+    .city_list>input {
+        max-width: 15rem;
+    }
+
+    #hr_min {
+        font-size: 1.5rem;
+    }
+    #seconds {
+        font-size: 1rem;
+    }
+
+    .am_pm {
+        width: 3rem;
+        height: 3rem;
+    }
+    .date{
+        font-size:1.5rem;
+    }
+
+    .weather_details {
+        display: grid;
+        grid-template-columns: repeat(4,1fr);
+        font-size: 1.5rem;
+        padding: 1.4rem 0;
+
+    }
     
-}
+    .humidity::before , .precipitation::before{
+        height: 65px;
+    }
 
-.city_time{
-    display: grid;
-    grid-template-columns:auto auto;
-    grid-template-rows: auto;
-    grid-column-gap: 0;
-}
+    .temp_fah::before{
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 5%;
+        height: 65px;
+        border-left: 0.1rem dotted var(--secondary-white);
+        
+    }
 
-.city-selector {
-    max-width: 10rem;
-}
-.city_icon {
-    width : 4rem;
-}
+    .timeline {
+        font-size: 1rem;
+    } 
 
-.city_list>input {
-    max-width: 15rem;
-}
-
-#hr_min {
-    font-size: 1.5rem;
-}
-#seconds {
-    font-size: 1rem;
-}
-
-.am_pm {
-    width: 3rem;
-    height: 3rem;
-}
-.date{
-    font-size:1.5rem;
-}
-
-.weather_details {
-    display: grid;
-    grid-template-columns: repeat(4,1fr);
-    font-size: 0.75rem;
-    padding: 1.4rem 0;
+    .timeline_hr_container {
+        width: 7rem;
+    }   
 
 }
-
-.temp_fah::before{
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 20%;
-    height: 80px;
-    border-left: 0.1rem dotted var(--secondary-white);
-    
-}
-
-.timeline {
-    font-size: 0.7rem;
-} 
-
-.timeline_hr_container {
-    width: 7rem;
-}   
-
 
 /*For Tablets and Large phones*/
 
 @media only screen and (max-width: 1035px) {
 
     .top_section {
-        grid-template: auto auto auto / auto;
+        grid-template: "city_time"
+                       "weather_details"
+                       "timeline";
     }
     
     .timeline {
@@ -255,6 +257,7 @@
         width: 6rem;
     }   
     
+}
 
 /*For Small Screen mobile phones*/
 
@@ -269,7 +272,7 @@
     }
     .city-selector{
         display: flex;
-        justify-content: space-around;
+        justify-items: center;
     }
     
     .city_list>input {
@@ -277,4 +280,4 @@
         padding: 0.5rem;
     }
 
-}    
+}
