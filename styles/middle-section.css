@@ -2,5 +2,14 @@
     background-color: var(--primary-black);
     border-radius: 60px 60px;
     min-height: calc(100vh - 0px);
-    
+    padding-top: 2.3rem;
+    display:flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: center;
+}
+.mid_title{
+    font-size: 1.5rem;
+    font-weight: lighter;
+    justify-self: center;
 }
