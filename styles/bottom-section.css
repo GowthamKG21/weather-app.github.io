@@ -30,6 +30,11 @@
 
 .bottom-container{
     margin: 1.5rem 0;
+    display: grid;
+    grid-template: repeat(4,auto) / repeat(3,auto);
+    justify-content: space-between;
+    row-gap: 2rem;
+    
 }
 
 .bottom-card{
@@ -53,7 +58,7 @@
 
 .b-temp{
     grid-area: temp;
-    font-size: 1.5rem;
+    font-size: 1.8rem;
     font-weight: bolder;
     justify-self: right;
 }
@@ -69,5 +74,5 @@
 .b-humidity{
     grid-area: humidity;
     justify-self: right;
-
+    align-self: center;
 }
