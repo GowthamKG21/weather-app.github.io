@@ -8,31 +8,28 @@
 
 .mid_titlebar{
     /* display:flex; */
-    width: 100%;
-
-    display:grid;
-    grid-template: auto / 3fr 1.8fr;
     
+    display:grid;
+    grid-template: ". title menu_bar";
+    align-items: center;
 }
 
 .mid_title{
-    justify-self: center;
-    align-self: center;
+    grid-area: title;
+    text-align: center;
     font-size: 1.5rem;
     font-weight: lighter;
-    
     white-space: nowrap;
     /*right: calc(100% - 50%);*/
    
 }
 
 .mid_menu{
-    justify-self: end;
-    width: 15rem;
-    display:flex;
-    justify-content: flex-end;
-    padding-right: 4rem;
-    /* justify-items: space-around; */
+    grid-area: menu_bar;
+    justify-self: center;
+    display: flex;
+    flex-direction: row;
+    /* justify-items: space-around; (Not working So padding used in menu)*/
     align-items: center;
 }
 
@@ -110,7 +107,7 @@
 }
 
 .arrow_bg > img{
-    width: 2.5rem;
+    width: 2.5rem; /*How to use calc here*/
 }
 
 .forward{
@@ -188,4 +185,34 @@
     z-index: 1;
 }
 
+@media only screen and (max-width: 650px) {
+    .mid_titlebar{
+        grid-template: "title"
+                       "menu_bar";
+        justify-items: center;         
+        row-gap: 1rem;
+    }
 
+    .mid_menu{
+        justify-self: center; 
+    }
+
+    .top_cities{
+        grid-template-columns: 2.5rem 1fr 2.5rem;
+    }
+
+    .arrow{
+        width: 2.3rem;
+        height: 2.3rem;
+    }
+
+    .arrow_bg > img{
+        width: 1.3rem;
+    }
+
+    .city_card_container{
+        padding-top: 0rem;
+    }
+
+    
+}
