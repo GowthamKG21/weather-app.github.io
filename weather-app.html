@@ -12,7 +12,7 @@
 <body>
     
 <!--Top Section-->
-<div class="top_section">
+<section class="top_section">
 
     <!--City Selector and Current Date,Time-->
     <div class="city_time">
@@ -163,12 +163,12 @@
         </div>        
     </div>
     
-</div>
+</section>
 
 
 <!--Middle Section-->
-<div class="middle_section">
 
+<section class="middle_section">
     <div class="mid_titlebar">
         <div class="mid_title">Top cities around world</div>
         <div class="mid_menu">
@@ -176,7 +176,7 @@
             <div class="menu snowflake"><img src="/assests/icons/weather-icons/snowflakeIcon.svg" alt="Snow Flake"></div>
             <div class="menu rainy"><img src="/assests/icons/weather-icons/rainyIcon.svg" alt="Rainy"></div>
             <div class="menu display_top">Display Top</div>
-            <div class="menu display_count"><input type="number" name="display_count" id="display_count"></div>
+            <div class="menu display_count"><input type="number" name="display_count" id="display_count" min="3" max="10"></div>
         </div>
     </div>
     
@@ -276,8 +276,24 @@
             <span class="arrow_bg"><img src="/assests/icons/general-icons/forwardArrow.svg" alt="forwardArrow"></span>
         </div>
     </div>
+</section>
 
-</div>
+<section>
+    <div class="bottom-section">
+        <div class="bottom-header">
+            <div class="bottom-title">Cities across continents at a Glance</div>
+            <div class="bottom-controls">
+                <span>Continent Name</span>
+                <span><img src="/assests/icons/general-icons/arrowUp.svg" alt="Up Arrow icon"></span>
+                <span>Temperature</span>
+                <span><img src="/assests/icons/general-icons/arrowDown.svg" alt="Down Arrow icon"></span>
+            </div>
+        </div>
+        
+        
+    </div>
+</section>
+
 
 </body>
 </html>
