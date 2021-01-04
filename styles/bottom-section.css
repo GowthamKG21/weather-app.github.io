@@ -26,6 +26,48 @@
 
 .bottom-controls > span img{
     width: 1.2rem;
+}
+
+.bottom-container{
+    margin: 1.5rem 0;
+}
+
+.bottom-card{
+    background-color: var(--bg-grey-tile);
+    font-size: 1.4rem;
+    width: 20rem;
+    display: grid;
+    grid-template: "continent temp"
+                   "city humidity" ;
+    align-items: center;
+    row-gap: 1rem;
+    padding: 1rem;
     
 }
 
+.b-continent{
+    grid-area: continent;
+    color: var(--bright-yellow-text);
+    font-weight: lighter;
+}
+
+.b-temp{
+    grid-area: temp;
+    font-size: 1.5rem;
+    font-weight: bolder;
+    justify-self: right;
+}
+
+.b-citytime{
+    grid-area: city;
+    font-weight: lighter;
+    display: flex;
+    flex-direction: row;
+}
+
+
+.b-humidity{
+    grid-area: humidity;
+    justify-self: right;
+
+}
