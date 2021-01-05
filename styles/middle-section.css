@@ -65,7 +65,9 @@
 
 .display_count > input[type=number]::-webkit-inner-spin-button {
     width: 0.5rem;
-    color: var(--bg-input-box); /*Arrow bg color not changing*/
+    color: var(--bg-input-box);
+    opacity: 0.5; 
+    /*Arrow bg color not changing*/
 }
 
 /*
@@ -114,7 +116,8 @@
 }
 
 .arrow_bg > img{
-    width: 2.5rem; /*How to use calc here*/
+    width: 2.5rem; 
+    /*How to use calc here*/
 }
 
 .forward{
@@ -196,7 +199,7 @@
 
 .citycard:hover{
     
-    transform: scale3d(1.5,1.5,5.5) translate3d(50px,0,100px);
+    transform: scale3d(2,2,5.5) translate3d(50px,0,100px);
     z-index: 1;
     
 }
@@ -219,6 +222,7 @@
     }
 }
   
+/*For Small Screen mobile phones*/
 
 @media only screen and (max-width: 650px) {
     .mid_titlebar{

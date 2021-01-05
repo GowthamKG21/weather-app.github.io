@@ -1,6 +1,7 @@
 .bottom-section{
     background-color: var(--primary-black);
-    padding: 4rem 6.5rem;
+    padding: calc(100% / 40) calc(100% / 15);
+    min-height: 100%;
 }
 
 .bottom-header{
@@ -12,41 +13,46 @@
 }
 
 .bottom-title{
-    font-size: 2.2rem;
+    font-size: calc(100vw / 45);
+    white-space: nowrap;
     
 }
 
 .bottom-controls{
-    width: 25rem;
-    font-size: 1.5rem;
+    width: calc(100% / 3);
+    font-size: calc(100vw / 70);
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
     
 }
 
+.bottom-controls > span{
+    width: calc(100% / 10);
+}
+
 .bottom-controls > span img{
-    width: 1.2rem;
+    width: calc(100% / 2);
 }
 
 .bottom-container{
     margin: 1.5rem 0;
     display: grid;
-    grid-template: repeat(4,auto) / repeat(3,auto);
+    grid-template: repeat(4,auto) / repeat(3,calc(100% / 3.5));
     justify-content: space-between;
-    row-gap: 2rem;
+    row-gap: calc(100% / 10);
     
 }
 
 .bottom-card{
     background-color: var(--bg-grey-tile);
-    font-size: 1.4rem;
-    width: 20rem;
+    font-size: calc(100vw / 60);
+    width: calc(100% / 1.12);
     display: grid;
     grid-template: "continent temp"
-                   "city humidity" ;
+                   "citytime humidity" ;
     align-items: center;
-    row-gap: 1rem;
-    padding: 1rem;
+    row-gap: calc(100% / 10);
+    padding: calc(100% / 20);
     
 }
 
@@ -58,16 +64,17 @@
 
 .b-temp{
     grid-area: temp;
-    font-size: 1.8rem;
+    font-size: calc(100vw / 50);
     font-weight: bolder;
     justify-self: right;
 }
 
 .b-citytime{
-    grid-area: city;
+    grid-area: citytime;
     font-weight: lighter;
     display: flex;
     flex-direction: row;
+    white-space: nowrap;
 }
 
 
@@ -75,4 +82,40 @@
     grid-area: humidity;
     justify-self: right;
     align-self: center;
+}
+
+.b-humidity > span img{
+    width: calc(100% / 4);
+}
+
+
+/*For Small Screen mobile phones*/
+
+@media only screen and (max-width: 600px) {
+    .bottom-header{
+        flex-direction: column;
+    }
+
+    .bottom-title{
+        margin: 0 0 1rem 0;
+        font-size: calc(100vw / 22);
+    }
+
+    .bottom-controls{
+        width: calc(100% / 1.3);
+        justify-content: space-around;
+        font-size: calc(100vw / 28);
+    }
+
+    .bottom-container{
+        grid-template: repeat(6,auto) / repeat(2,calc(100% / 2.2));
+    }
+
+    .bottom-card{
+        font-size: calc(100vw / 35);
+    }
+
+    .b-temp{
+        font-size: calc(100vw / 25);
+    }
 }
