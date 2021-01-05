@@ -135,13 +135,14 @@
     min-width: 17rem;
     height: 15rem;   
     background-color: var(--bg-dark-grey-tile); 
-    box-shadow: 5px 10px 8px 5px var(--bg-grey-tile);
+   
     display: flex;
     flex-direction: column;
     padding: 1rem;
     margin: 1rem;
     position: relative;
     white-space: nowrap;
+    overflow: hidden;
 }
 
 .citycard > div{
@@ -186,23 +187,29 @@
 
 .card_city_icon{
     justify-self: right;
+    
 }
     
 .card_city_icon > img{
     width: 13rem;
     position: absolute;
-    right: 0px;
-    bottom: 0px;
-    z-index: 1;
+    right: -50px;
+    bottom: 10px;
+     
 }
 
 
 .citycard:hover{
     
-    transform: scale3d(2,2,5.5) translate3d(50px,0,100px);
+    transform: scale3d(1.5,1.5,5.5) translate3d(50px,0,100px);
+    overflow: visible;
+    box-shadow: 0px 0px 80px 100px var(--bg-grey-tile);
     z-index: 1;
     
 }
+
+
+/* Rolling circular animation for Sunny and Snowflake */
 
 @keyframes roll {
     0% {
@@ -212,6 +219,8 @@
       transform: rotate(360deg);
     }
 }
+
+/* Swinging front and back animation for Clouds*/
 
 @keyframes swing {
     0% {
