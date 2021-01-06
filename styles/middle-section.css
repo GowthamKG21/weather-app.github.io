@@ -140,7 +140,7 @@
     padding-top: 1.5rem;
     display: flex;
     flex-direction: row;
-    overflow: auto;
+    overflow: scroll;
     -ms-overflow-style: none;  /* IE and Edge */
     scrollbar-width: none;  /* Firefox */
 }
@@ -152,8 +152,7 @@
 .citycard{
     min-width: 17rem;
     height: 15rem;   
-    
-   
+    box-shadow: 0px 0px 8px 5px var(--bg-grey-tile);
     display: flex;
     flex-direction: column;
     padding: 1rem;
@@ -172,7 +171,6 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-
     font-size: 1.5rem;
 }
 
@@ -219,11 +217,24 @@
 
 .citycard:hover{
     
-    transform: scale3d(1.5,1.5,5.5) translate3d(50px,0,100px);
+    background-color: var(--primary-white);
+    color: var(--primary-black);
+    border: 1px solid var(--primary-white);
+    /*border-radius: 15%;*/
+    transform: scale3d(1.1,1.1,1) translate3d(0,0,100px);
+    transition: transform 1s;
+    transform-style: preserve-3d;
     overflow: visible;
-    box-shadow: 0px 0px 80px 100px var(--bg-grey-tile);
+    box-shadow: 0px 0px 30px 30px var(--bg-grey-tile);
     z-index: 1;
     
+}
+
+.citycard:hover > .card_city_icon img{
+    right: 0rem;
+    bottom: 1.25rem;
+    z-index: -1;
+    /*animation: rotate 10s infinite;*/
 }
 
 
@@ -235,6 +246,16 @@
     }
     100% {
       transform: rotate(360deg);
+    }
+}
+
+/* Rotating City Icons */
+@keyframes rotate{
+    0% {
+        transform: rotate(0);
+    }
+    100%{
+        
     }
 }
 

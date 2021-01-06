@@ -123,7 +123,13 @@
     font-family: 'Roboto';
     font-weight: 100;
     font-size: 1.3rem;    
-    overflow: hidden;
+    overflow: scroll;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
+.timeline::-webkit-scrollbar {
+    display: none;
 }
 
 .timeline_hr_container {

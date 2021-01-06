@@ -78,7 +78,7 @@
 }
 
 .flipcard-back{
-    
+    background-color: var(--primary-white);
     width: 100%;
     transform: rotateY(180deg);
     display: flex;
