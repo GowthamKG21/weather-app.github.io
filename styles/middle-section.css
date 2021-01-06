@@ -34,10 +34,18 @@
 
 .menu{
     padding: 0.5rem;
+    
     /* justify-self: space-around; */
 }
 
-.sunny{
+.pref-btn{
+    
+    background-color: transparent;
+    border: none;
+    outline: none;
+}
+
+.pref-btn:focus{
     border-bottom: 2px solid var(--light-blue-border);
 }
 
@@ -100,24 +108,28 @@
     padding: 1rem;
 }
 
-.arrow{
-    
+.arrow-button{
+    border: none;
+    border-radius: 50%;
+    background-color: var(--secondary-white);
     width: 3.5rem;
     height: 3.5rem;
-    background-color: var(--secondary-white);
-    border-radius: 200px;
     display: flex;
     justify-content: center;
     align-content: center;
+    cursor: pointer;
+    outline: none;
 }
 
-.arrow_bg{
-    align-self: center;
+.arrow-button:hover{
+    box-shadow: 0px 0px 7px 10px var(--bg-grey-tile);
+    width: 3.7rem;
+    height: 3.7rem;
 }
 
-.arrow_bg > img{
+.arrow-button > img{
     width: 2.5rem; 
-    /*How to use calc here*/
+    align-self: center;
 }
 
 .forward{
@@ -128,13 +140,19 @@
     padding-top: 1.5rem;
     display: flex;
     flex-direction: row;
-    overflow: hidden;
+    overflow: auto;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
+.city_card_container::-webkit-scrollbar {
+    display: none;
 }
 
 .citycard{
     min-width: 17rem;
     height: 15rem;   
-    background-color: var(--bg-dark-grey-tile); 
+    
    
     display: flex;
     flex-direction: column;
@@ -260,6 +278,10 @@
 
     .city_card_container{
         padding-top: 0rem;
+    }
+
+    .citycard:hover{
+        transform: none;
     }
 
     
