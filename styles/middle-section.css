@@ -7,7 +7,6 @@
 
 .mid_titlebar{
     /* display:flex; */
-    
     display:grid;
     grid-template: ". title menu_bar";
     align-items: center;
@@ -28,20 +27,19 @@
     justify-self: center;
     display: flex;
     flex-direction: row;
-    /* justify-items: space-around; (Not working So padding used in menu)*/
+    /* justify-items: space-around; */
     align-items: center;
 }
 
 .menu{
     padding: 0.5rem;
-    
     /* justify-self: space-around; */
 }
 
 .pref-btn{
-    
     background-color: transparent;
     border: none;
+    cursor: pointer;
     outline: none;
 }
 
@@ -75,7 +73,7 @@
     width: 0.5rem;
     color: var(--bg-input-box);
     opacity: 0.5; 
-    /*Arrow bg color not changing*/
+    
 }
 
 /*
@@ -106,6 +104,7 @@
     grid-template-columns: 5rem 1fr 5rem;
     align-items: center;
     padding: 1rem;
+    cursor: pointer;
 }
 
 .arrow-button{
@@ -152,7 +151,7 @@
 .citycard{
     min-width: 17rem;
     height: 15rem;   
-    box-shadow: 0px 0px 8px 5px var(--bg-grey-tile);
+    box-shadow: 0px 0px 10px 10px var(--bg-grey-tile);
     display: flex;
     flex-direction: column;
     padding: 1rem;
@@ -225,7 +224,7 @@
     transition: transform 1s;
     transform-style: preserve-3d;
     overflow: visible;
-    box-shadow: 0px 0px 30px 30px var(--bg-grey-tile);
+    box-shadow: 0px 0px 20px 30px var(--bg-grey-tile);
     z-index: 1;
     
 }
@@ -249,7 +248,7 @@
     }
 }
 
-/* Rotating City Icons */
+/* Rotating City Icons like 3D*/
 @keyframes rotate{
     0% {
         transform: rotate(0);
@@ -285,25 +284,44 @@
     }
 
     .top_cities{
-        grid-template-columns: 2.5rem 1fr 2.5rem;
+        grid-template-columns: 2rem 1fr 2rem;
     }
 
-    .arrow{
-        width: 2.3rem;
-        height: 2.3rem;
+    .arrow-button{
+        width: 1.7rem;
+        height: 1.7rem;
     }
 
-    .arrow_bg > img{
-        width: 1.3rem;
+    .arrow-button > img{
+        width: 1rem;
     }
 
     .city_card_container{
         padding-top: 0rem;
     }
 
+    .citycard{
+        min-width: 13rem;
+        height: 15rem;   
+        font-size: 1rem;
+        box-shadow: 0px 0px 7px 7px var(--bg-grey-tile);
+        padding: 0.8rem;
+        margin: 1rem;
+    }
+    
     .citycard:hover{
         transform: none;
     }
 
+    .card_row1{
+        font-size: 1.2rem;
+    }
+
+    .card_row1 .weather_icon>img{
+        width: 1rem;
+    }
     
+    .card_city_icon > img{
+        width: 10rem;
+    }
 }

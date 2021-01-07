@@ -76,9 +76,7 @@
 .am_pm{
     width: calc(100% / 4em);
     height: 4em;
-    padding:0 0 0 1rem;
-    /*icon need to be placed little bit down*/ 
-    color: var(--pale-yellow-text);    /*Not Working*/
+    padding:0 0 0 1rem;    
 }
 
 .date{
@@ -242,13 +240,14 @@
 
     .timeline_hr_container {
         width: 7rem;
+        grid-template-columns: 4rem 3rem;
     }   
 
 }
 
 /*For Tablets and Large phones*/
 
-@media only screen and (max-width: 1035px) {
+@media only screen and (max-width: 1036px) {
 
     .top_section {
         grid-template: "city_time"
@@ -266,7 +265,7 @@
     
 }
 
-/*For Small Screen mobile phones*/
+/*For mobile phones*/
 
 @media only screen and (max-width: 600px) {
 
@@ -287,4 +286,36 @@
         padding: 0.5rem;
     }
 
+}
+
+/*For Small Screen mobile phones*/
+
+@media only screen and (max-width: 515px) {
+    .top_section {
+        display:grid;
+        grid-template-areas:"city_time"
+                            "weather_details"
+                            "timeline";
+        
+    }
+
+    .timeline_hr_container {
+        width: 6rem;
+        grid-template-columns: 3rem 3rem;
+    } 
+
+    .weather_details{
+        grid-template-columns: calc(100% / 2) calc(100% / 3);
+        justify-self: center;
+        row-gap: 1rem;
+        align-items: center;
+    }
+
+    .temp_fah::before{
+        border: none;
+    }
+
+    .weather{
+        padding: 0.1rem 1rem 0.1rem 1rem;
+    }
 }
