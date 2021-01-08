@@ -1,23 +1,23 @@
 /* For LARGE SCREENS Laptops */
 
 /*Entire Top Section*/
-.top_section {
+.top-section {
     display:grid;
-    grid-template-areas:"city_time weather_details timeline";
+    grid-template-areas:"city-time weather-details timeline";
     grid-gap: 0.8em;
     padding: 1.2rem 0;
 }
 
 /* Module 1: City Selector Time and Date display*/
-.city_time{
-    grid-area: city_time;
+.city-time{
+    grid-area: city-time;
     display: grid;
     grid-template-rows: auto auto;
     align-items: center;
     
 }
 
-.time_date {
+.time-date {
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
@@ -26,22 +26,22 @@
     white-space: nowrap;
 }
 
-.city_selector {
+.city-selector {
     display: flex;
     flex-direction: row;
     justify-content: center;
     max-width:100%;
 }
 
-.city_icon {
+.city-icon {
     width: 5rem;
 }
 
-.city_icon > img{
+.city-icon > img{
     max-width: 100%;
 }
 
-.city_list>input {
+.city-list>input {
     max-width: 15rem;
     max-height: 5rem;
     background-color: var(--bg-input-box);
@@ -55,7 +55,7 @@
     margin-left: 1rem;
 }
 
-.city_list::-webkit-calendar-picker-indicator {
+.city-list::-webkit-calendar-picker-indicator {
     /*   display: none; */
     font-size: 0.5em;
     color: var(--secondary-white);
@@ -65,7 +65,7 @@
     color: var(--pale-yellow-text); 
 }
 
-#hr_min{
+#hr-min{
     font-size: 2rem;
 }
 
@@ -73,7 +73,7 @@
     font-size: 1.25rem;
 }
 
-.am_pm{
+.am-pm{
     width: calc(100% / 4em);
     height: 4em;
     padding:0 0 0 1rem;    
@@ -86,8 +86,8 @@
 
 /* Module:2  Main Weather Report of Selected City*/
 
-.weather_details{
-    grid-area: weather_details;
+.weather-details{
+    grid-area: weather-details;
     display: grid;
     grid-template-columns: auto auto;
     align-items: center;
@@ -130,7 +130,7 @@
     display: none;
 }
 
-.timeline_hr_container {
+.timeline-hr-container {
     display: grid;
     grid-template-columns: 6rem 2rem;
     grid-template-rows: 2rem 2rem 3.5rem 1.5rem;
@@ -146,22 +146,22 @@
 }
 
 
-.w_hr {
+.w-hr {
     grid-area: hr;
 }
-.w_indicator {
+.w-indicator {
     grid-area: in;
     font-weight: bold;
 }
-.w_icon {
+.w-icon {
     grid-area: ic;
     width: 3rem;
 }
-.w_value {
+.w-value {
     grid-area: val;
     font-weight:normal;
 }
-.w_time_separator {
+.w-time-separator {
     grid-area: sep;
 }
 
@@ -170,15 +170,15 @@
 
 @media only screen and (max-width: 1310px) {
 
-    .top_section {
+    .top-section {
         display:grid;
-        grid-template-areas: "city_time weather_details" 
+        grid-template-areas: "city-time weather-details" 
                              "timeline timeline";
         row-gap: 1rem;
         
     }
 
-    .city_time{
+    .city-time{
         display: grid;
         grid-template-columns:auto auto;
         grid-template-rows: auto;
@@ -188,22 +188,22 @@
     .city-selector {
         max-width: 10rem;
     }
-    .city_icon {
+    .city-icon {
         width : 4rem;
     }
 
-    .city_list>input {
+    .city-list>input {
         max-width: 15rem;
     }
 
-    #hr_min {
+    #hr-min {
         font-size: 1.5rem;
     }
     #seconds {
         font-size: 1rem;
     }
 
-    .am_pm {
+    .am-pm {
         width: 3rem;
         height: 3rem;
     }
@@ -211,7 +211,7 @@
         font-size:1.5rem;
     }
 
-    .weather_details {
+    .weather-details {
         display: grid;
         grid-template-columns: repeat(4,1fr);
         font-size: 1.5rem;
@@ -223,7 +223,7 @@
         height: 65px;
     }
 
-    .temp_fah::before{
+    .temp-fah::before{
         content: "";
         position: absolute;
         left: 0;
@@ -238,7 +238,7 @@
         overflow: hidden;
     } 
 
-    .timeline_hr_container {
+    .timeline-hr-container {
         width: 7rem;
         grid-template-columns: 4rem 3rem;
     }   
@@ -249,9 +249,9 @@
 
 @media only screen and (max-width: 1036px) {
 
-    .top_section {
-        grid-template: "city_time"
-                       "weather_details"
+    .top-section {
+        grid-template: "city-time"
+                       "weather-details"
                        "timeline";
     }
     
@@ -259,7 +259,7 @@
         font-size: 0.7rem;
     } 
     
-    .timeline_hr_container {
+    .timeline-hr-container {
         width: 6rem;
     }   
     
@@ -269,10 +269,10 @@
 
 @media only screen and (max-width: 600px) {
 
-    .city_time {
+    .city-time {
         grid-template: auto auto / auto ;
     }
-    .time_date {
+    .time-date {
         flex-direction: row;
         justify-content: space-around;
     }
@@ -281,7 +281,7 @@
         justify-items: center;
     }
     
-    .city_list>input {
+    .city-list>input {
         font-size: 2rem;
         padding: 0.5rem;
     }
@@ -291,27 +291,27 @@
 /*For Small Screen mobile phones*/
 
 @media only screen and (max-width: 515px) {
-    .top_section {
+    .top-section {
         display:grid;
-        grid-template-areas:"city_time"
-                            "weather_details"
+        grid-template-areas:"city-time"
+                            "weather-details"
                             "timeline";
         
     }
 
-    .timeline_hr_container {
+    .timeline-hr-container {
         width: 6rem;
         grid-template-columns: 3rem 3rem;
     } 
 
-    .weather_details{
+    .weather-details{
         grid-template-columns: calc(100% / 2) calc(100% / 3);
         justify-self: center;
         row-gap: 1rem;
         align-items: center;
     }
 
-    .temp_fah::before{
+    .temp-fah::before{
         border: none;
     }
 

@@ -1,8 +1,8 @@
-@import url('vars.css');
-@import url('fonts.css');
-@import url('top-section.css');
-@import url('middle-section.css');
-@import url('bottom-section.css');
+@import url("vars.css");
+@import url("fonts.css");
+@import url("top-section.css");
+@import url("middle-section.css");
+@import url("bottom-section.css");
 
 
 body{
@@ -13,7 +13,6 @@ body{
     background-size: cover;   /* edge cropped */
     
     font-family: 'Roboto', sans-serif;
-   
     color: var(--primary-white);
     margin: 0;
 }

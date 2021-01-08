@@ -1,18 +1,18 @@
-.middle_section{
+.middle-section{
     background-color: var(--primary-black);
     border-radius: 60px 60px 0 0;
     padding: 2.3rem 0rem 0rem 0rem;
     width: 100%;
 }
 
-.mid_titlebar{
+.mid-titlebar{
     /* display:flex; */
     display:grid;
-    grid-template: ". title menu_bar";
+    grid-template: ". title menu-bar";
     align-items: center;
 }
 
-.mid_title{
+.mid-title{
     grid-area: title;
     text-align: center;
     font-size: 1.5rem;
@@ -22,8 +22,8 @@
    
 }
 
-.mid_menu{
-    grid-area: menu_bar;
+.mid-menu{
+    grid-area: menu-bar;
     justify-self: center;
     display: flex;
     flex-direction: row;
@@ -55,11 +55,11 @@
     animation:swing 5s infinite;
 }
 
-.display_top{
+.display-top{
     font-weight: lighter;
 }
 
-.display_count > input{
+.display-count > input{
     width: 2.3rem;
     height: 1rem;
     background-color: var(--bg-input-box);
@@ -69,7 +69,7 @@
     font-weight: lighter;
 }
 
-.display_count > input[type=number]::-webkit-inner-spin-button {
+.display-count > input[type=number]::-webkit-inner-spin-button {
     width: 0.5rem;
     color: var(--bg-input-box);
     opacity: 0.5; 
@@ -77,7 +77,7 @@
 }
 
 /*
-.mid_title{
+.mid-title{
     display: inline-block;
     
     display:flex;
@@ -88,7 +88,7 @@
     //justify-self: center; 
 }
 
-.mid_menu{
+.mid-menu{
     display: inline-block;
     flex:1;
     display:flex;
@@ -99,7 +99,7 @@
 }
 */
 
-.top_cities{
+.top-cities{
     display: grid;
     grid-template-columns: 5rem 1fr 5rem;
     align-items: center;
@@ -135,7 +135,7 @@
     justify-self: right;
 }
 
-.city_card_container{
+.city-card-container{
     padding-top: 1.5rem;
     display: flex;
     flex-direction: row;
@@ -144,7 +144,7 @@
     scrollbar-width: none;  /* Firefox */
 }
 
-.city_card_container::-webkit-scrollbar {
+.city-card-container::-webkit-scrollbar {
     display: none;
 }
 
@@ -165,7 +165,7 @@
     padding: 0.5rem 0;
 }
 
-.card_row1{
+.card-row1{
     display:flex;
     flex-direction: row;
     justify-content: space-between;
@@ -180,32 +180,32 @@
     justify-content: space-between;
 }
 
-.card_row1 .weather_icon{
+.card-row1 .weather-icon{
     padding: 0 0.3rem;
     display: flex;
     align-items: center;
     
 }
-.card_row1 .weather_icon>img{
+.card-row1 .weather-icon>img{
     width: 1.5rem;
 }
 
-.card_humidity,.card_precipitation{
+.card-humidity,.card-precipitation{
     display: flex;
     align-items: center;
     font-weight: lighter;
 }
 
-.card_humidity > img,.card_precipitation > img{
+.card-humidity > img,.card-precipitation > img{
     padding-right: 0.5rem;
 }
 
-.card_city_icon{
+.card-city-icon{
     justify-self: right;
     
 }
     
-.card_city_icon > img{
+.card-city-icon > img{
     width: 13rem;
     position: absolute;
     right: -50px;
@@ -229,7 +229,7 @@
     
 }
 
-.citycard:hover > .card_city_icon img{
+.citycard:hover > .card-city-icon img{
     right: 0rem;
     bottom: 1.25rem;
     z-index: -1;
@@ -272,18 +272,18 @@
 /*For Small Screen mobile phones*/
 
 @media only screen and (max-width: 650px) {
-    .mid_titlebar{
+    .mid-titlebar{
         grid-template: "title"
-                       "menu_bar";
+                       "menu-bar";
         justify-items: center;         
         row-gap: 1rem;
     }
 
-    .mid_menu{
+    .mid-menu{
         justify-self: center; 
     }
 
-    .top_cities{
+    .top-cities{
         grid-template-columns: 2rem 1fr 2rem;
     }
 
@@ -296,7 +296,7 @@
         width: 1rem;
     }
 
-    .city_card_container{
+    .city-card-container{
         padding-top: 0rem;
     }
 
@@ -313,15 +313,15 @@
         transform: none;
     }
 
-    .card_row1{
+    .card-row1{
         font-size: 1.2rem;
     }
 
-    .card_row1 .weather_icon>img{
+    .card-row1 .weather-icon>img{
         width: 1rem;
     }
     
-    .card_city_icon > img{
+    .card-city-icon > img{
         width: 10rem;
     }
 }
