@@ -185,9 +185,7 @@
         grid-column-gap: 0;
     }
 
-    .city-selector {
-        max-width: 10rem;
-    }
+    
     .city-icon {
         width : 4rem;
     }
