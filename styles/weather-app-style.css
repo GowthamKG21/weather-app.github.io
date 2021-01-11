@@ -1,0 +1,19 @@
+@import url("vars.css");
+@import url("fonts.css");
+@import url("top-section.css");
+@import url("middle-section.css");
+@import url("bottom-section.css");
+
+
+body{
+    background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),url(../assets/icons/general-icons/background.svg);
+    background-attachment:fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;   /* edge cropped */
+    
+    font-family: 'Roboto', sans-serif;
+    color: var(--primary-white);
+    margin: 0;
+}
+
