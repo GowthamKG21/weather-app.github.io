@@ -6,10 +6,10 @@
     <title>Weather App</title>
     <link rel="icon" href="./assets/icons/general-icons/solitonkg.png"> 
     <link rel="stylesheet" href="./styles/weather-app-style.css">
-    
+    <script type="module" src="./scripts/weather-app.js" defer></script>
 </head>
 
-<body>
+<body >
     
 <!--Top Section-->
 <section class="top-section">
@@ -17,25 +17,15 @@
     <!--City Selector and Current Date,Time-->
     <div class="city-time">
         
-        <div class="city-selector">
-            <div class="city-icon">
-                <img src="./assets/icons/city-icons/kolkata.svg" alt="City Icon">   
+        <div class="city-selector" >
+            <div class="city-icon" >
+                <img src="" alt="City Icon" id="cityicon">   
             </div>
 
             <div class="city-list" title="Select a City"> 
-            <input class="city-list" list="cities" name="city" id="city" placeholder="select a city">
-                <datalist id="cities">
-                    <option value="Auckland">
-                    <option value="Bangkok">
-                    <option value="Karachi">
-                    <option value="Kolkata">
-                    <option value="London">
-                    <option value="Moscow">
-                    <option value="Newyork">
-                    <option value="Nome">
-                    <option value="Perth">
-                    <option value="Seol">
-                    <option value="Vienna">
+            <input class="city-list" list="cityoptions" name="city" id="cityinput" placeholder="select a city">
+                <datalist id="cityoptions">
+                   
                 </datalist>           
             </div>
         </div>
@@ -44,14 +34,15 @@
         <div class="time-date">
             <div class="time">
                 <p>
-                    <span id="hr-min">10 &colon; 10 </span>
-                    <span id="seconds"> &colon; 44</span>
-                    <img class="am-pm" src="/./assets/icons/general-icons/amState.svg" alt="AM/PM Icon">
+                    <span id="hr"></span>
+                    <span id="min"></span>
+                    <span id="seconds"></span>
+                    <img class="am-pm" src="" alt="AM/PM Icon" id="ampm" >
                 </p>
             </div>
             
-            <div class="date">
-                <span>01-Mar-2020</span>
+            <div class="date" id="date">
+                
             </div>
         </div> 
     </div>
@@ -60,102 +51,25 @@
     <div class="weather-details">
             <div class="weather temp-cel">
                 <div>Temp &deg; C</div>
-                <div><strong>25 C</strong></div>
+                <div id="celcius"></div>
             </div>
             <div class="weather humidity">
                 <div>Humidity</div>
-                <div><strong>26</strong>%</div>
+                <div id="humidity"></div>
             </div>
             <div class="weather temp-fah">
                 <div>Temp F</div>
-                <div><strong>78 F</strong></div>
+                <div id="farenheit"></div>
             </div>
             <div class="weather precipitation">
                 <div>Precipitation</div>
-                <div><strong>0</strong>%</div>
+                <div id="precipitation"></div>
             </div>
     </div>
 
     <!--Timeline weather Report-->
-    <div class="timeline">
-       <div class="timeline-hr-container">
-           <div class="w w-hr">NOW</div>
-           <div class="w w-indicator">|</div>
-           <div class="w w-icon"><img src="./assets/icons/weather-icons/cloudyIcon.svg"  alt="cloudyIcon"></div>
-           <div class="w w-value">6</div>
-           <div class="w w-time-separator">|</div>
-       </div>
-        <div class="timeline-hr-container">
-            <div class="w w-hr">11 AM</div>
-            <div class="w w-indicator">|</div>
-            <div class="w w-icon"><img src="./assets/icons/weather-icons/rainyIcon.svg"  alt="RainyIcon"></div>
-            <div class="w w-value">7</div>
-            <div class="w w-time-separator">|</div>
-        </div>
-        <div class="timeline-hr-container">
-            <div class="w w-hr">12 PM</div>
-            <div class="w w-indicator">|</div>
-            <div class="w w-icon"><img src="./assets/icons/weather-icons/windyIcon.svg"  alt="WindyIcon"></div>
-            <div class="w w-value">7</div>
-            <div class="w w-time-separator">|</div>
-        </div>
-        <div class="timeline-hr-container">
-            <div class="w w-hr">1 PM</div>
-            <div class="w w-indicator">|</div>
-            <div class="w w-icon"><img src="./assets/icons/weather-icons/rainyIcon.svg"  alt="RainyIcon"></div>
-            <div class="w w-value">8</div>
-            <div class="w w-time-separator">|</div>
-        </div>
-        <div class="timeline-hr-container">
-            <div class="w w-hr">2 PM</div>
-            <div class="w w-indicator">|</div>
-            <div class="w w-icon"><img src="./assets/icons/weather-icons/windyIcon.svg"  alt="WindyIcon"></div>
-            <div class="w w-value">6</div>
-            <div class="w w-time-separator">|</div>
-        </div>
-        
-        <div class="timeline-hr-container">
-            <div class="w w-hr">3 PM</div>
-            <div class="w w-indicator">|</div>
-            <div class="w w-icon"><img src="./assets/icons/weather-icons/windyIcon.svg"  alt="WindyIcon"></div>
-            <div class="w w-value">8</div>
-            <div class="w w-time-separator">|</div>
-        </div>
-        <div class="timeline-hr-container">
-            <div class="w w-hr">4 PM</div>
-            <div class="w w-indicator">|</div>
-            <div class="w w-icon"><img src="./assets/icons/weather-icons/windyIcon.svg"  alt="WindyIcon"></div>
-            <div class="w w-value">7</div>
-            <div class="w w-time-separator">|</div>
-        </div>
-        <div class="timeline-hr-container">
-            <div class="w w-hr">5 PM</div>
-            <div class="w w-indicator">|</div>
-            <div class="w w-icon"><img src="./assets/icons/weather-icons/windyIcon.svg"  alt="WindyIcon"></div>
-            <div class="w w-value">6</div>
-            <div class="w w-time-separator">|</div>
-        </div>
-        <div class="timeline-hr-container">
-            <div class="w w-hr">6 PM</div>
-            <div class="w w-indicator">|</div>
-            <div class="w w-icon"><img src="./assets/icons/weather-icons/windyIcon.svg"  alt="WindyIcon"></div>
-            <div class="w w-value">5</div>
-            <div class="w w-time-separator">|</div>
-        </div>
-        <div class="timeline-hr-container">
-            <div class="w w-hr">7 PM</div>
-            <div class="w w-indicator">|</div>
-            <div class="w w-icon"><img src="./assets/icons/weather-icons/windyIcon.svg"  alt="WindyIcon"></div>
-            <div class="w w-value">6</div>
-            <div class="w w-time-separator">|</div>
-        </div>
-        <div class="timeline-hr-container">
-            <div class="w w-hr">8 PM</div>
-            <div class="w w-indicator">|</div>
-            <div class="w w-icon"><img src="./assets/icons/weather-icons/windyIcon.svg"  alt="WindyIcon"></div>
-            <div class="w w-value">4</div>
-            <div class="w w-time-separator">|</div>
-        </div>        
+    <div class="timeline" id = "timeline">
+       
     </div>
     
 </section>

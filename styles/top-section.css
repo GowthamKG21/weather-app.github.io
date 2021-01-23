@@ -65,7 +65,7 @@
     color: var(--pale-yellow-text); 
 }
 
-#hr-min{
+#hr, #min{
     font-size: 2rem;
 }
 
