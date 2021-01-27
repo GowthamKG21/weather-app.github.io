@@ -3,10 +3,10 @@
 // Utilities  module contains createElement functions
 import {createElementWithClassAppend,createImage} from './utilities.js';
 
-/*
+
 // Initialize module contains JSON fetching
-import {data} from './initialize.js';
-*/
+//import {data} from './initialize.js';
+
 
 //variables used between functions
 let intervalID; 
@@ -31,13 +31,17 @@ let timeline = document.getElementById("timeline");
 //Hourly weather Timeline 
 
 function hourlyWeather (whrVal,wtempVal) {
+    console.log("hw: "+ whrVal + "," + wtempVal);
     let tBox = createElementWithClassAppend('div' , "timeline-hr-container" , "" , timeline);
     if (whrVal == "NOW") {
     }
     else if (whrVal >= 0 && whrVal < 12) {
         whrVal = whrVal + " AM";
     }
-    else if (whrVal >= 12 && whrVal < 24){
+    else if (whrVal == 12) {
+        whrVal = whrVal + " PM";
+    }
+    else if (whrVal > 12 && whrVal < 24){
         whrVal = (whrVal % 12) + " PM";
     }
     
@@ -68,6 +72,7 @@ function hourlyWeather (whrVal,wtempVal) {
     let wSeparator = createElementWithClassAppend('div' , "w w-time-separator" , "|" , tBox);
 }
 
+////////////////////////////// iife
 //function initialize(){
 (function () {
 
@@ -114,7 +119,14 @@ function clock() {
     return i;
     }
     
-    hr.innerHTML = h%12;
+    hr.innerHTML = (function () {
+        if (h > 12) {
+            return h % 12;
+        }
+        else {
+            return h;
+        }
+    })();
     min.innerHTML = " &colon; " + m;
     sec.innerHTML = " &colon; " + s;
 
@@ -172,6 +184,10 @@ function display(){
 
   if (typeof cityobj != "undefined") {
     
+    cityinput.style.border = "none";
+    cityinput.style.textDecoration = "none";
+    document.getElementById("validateMsg").style.display = "none";
+
     //City Icon
     let cityname = cityobj.cityName.toLowerCase();
     cityicon.src = `../assets/icons/city-icons/${cityname}.svg`;
@@ -188,19 +204,32 @@ function display(){
     fah.innerHTML = "<strong>" + ((parseInt(cityobj.temperature) * 1.8 ) + 32 ) + "</strong>";
     precip.innerHTML = "<strong>" + precipVal.slice(0 , precipVal.length - 1) + "</strong>" + precipVal[precipVal.length - 1];
 
-    timeline.innerHTML = "";
+   
+    timeline.innerHTML="";
+    // while(timeline.firstElementChild) {
+    //     alert("hi");
+    //     timeline.removeChild(timeline.firstElementchild);
+    // }
+
+    // timeline.parentNode.removeChild(timeline);
+
     hourlyWeather("NOW" , parseInt( cityobj.temperature.slice(0 , cityobj.temperature.length - 1) ));
+    let whrVal =  clock() + 1;
     for (let temp of cityobj.nextFiveHrs) {
         //currentHr (current hour) is not working properly
-        let whrVal =  currentHr + cityobj.nextFiveHrs.indexOf(temp) + 1;
+        console.log("index:"+ cityobj.nextFiveHrs.indexOf(temp));
         let wtempVal = parseInt( temp.slice(0 , temp.length - 1) );
         hourlyWeather( whrVal , wtempVal);
+        whrVal++;
     }
 
 
   }
   else {
-        //If needed Validation for incomplete city name can be added
+      //alert("entered");
+      cityinput.style.border = "2px solid red";
+      document.getElementById("validateMsg").style.display = "block";
+    //If needed Validation for incomplete city name can be added
   } 
 
 } //close brace for display function

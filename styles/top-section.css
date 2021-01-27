@@ -53,6 +53,19 @@
     font-size: 2.5rem;
     padding: 1rem;
     margin-left: 1rem;
+    text-decoration: none;
+}
+
+.city-list {
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+}
+
+.validateMsg {
+    color: red;
+    text-align: center;
+    display: none;
 }
 
 .city-list::-webkit-calendar-picker-indicator {
