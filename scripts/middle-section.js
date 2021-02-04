@@ -122,6 +122,14 @@ function cityContainer(pref_weather) {
 
 function displayTopCities(count) {
     middleContainer.innerHTML = "";
+    if (count > 10) {
+        count = 10;
+        displayCount.value = 10;
+    }
+    if (count < 3) {
+        count = 3;
+        
+    }
     let displayCities = selectedCities.filter( (selectedCities,id) => id < count) ;
     displayCities.forEach( function (item,index) {
         createCard(item.city , item.wname);
