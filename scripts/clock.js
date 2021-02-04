@@ -26,7 +26,8 @@ export function clock(cityobj, hr, min, sec, ampm, displayDate, place) {
 
     // Hours
     hr.innerHTML = (function () {
-        if (hours > 12) { return hours % 12; }
+        if (hours == 0) { return 12; }
+        else if (hours > 12) { return hours % 12; }
         else { return hours; }
     })();
 
