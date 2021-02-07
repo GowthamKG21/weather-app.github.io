@@ -1,366 +1,579 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Weather App</title>
-    <link rel="icon" href="./assets/icons/general-icons/solitonkg.png"> 
-    <link rel="stylesheet" href="./styles/weather-app-style.css">
+    <link rel="icon" href="./assets/icons/general-icons/solitonkg.png" />
+    <link rel="stylesheet" href="./styles/weather-app-style.css" />
     <script type="module" src="./scripts/top-section.js" defer></script>
-</head>
+  </head>
 
-<body >
-    
-<!--Top Section-->
-<section class="top-section">
-
-    <!--City Selector and Current Date,Time-->
-    <div class="city-time">
-        
+  <body>
+    <!--Top Section - Selected City Weather Details-->
+    <section class="top-section">
+      <div class="city-time">
+        <!--City Selector - City Icon and City Input-->
         <div class="city-selector">
-            <div class="city-icon">
-                <img src="" alt="City Icon" id="cityicon">   
-            </div>
-
-            <div class="city-list" title="Select a City" id ="cityList"> 
-            <input class="city-list" list="cityoptions" name="city" id="cityinput" placeholder="select a city">
-                <datalist id="cityoptions">
-                   
-                </datalist>  
-            <span class="validateMsg" id="validateMsg">Enter valid city name</span>         
-            </div>
+          <div class="city-icon">
+            <img src="" alt="City Icon" id="cityicon" />
+          </div>
+          <div class="city-list" title="Select a City" id="cityList">
+            <input
+              class="city-list"
+              list="cityoptions"
+              name="city"
+              id="cityinput"
+              placeholder="select a city"
+            />
+            <datalist id="cityoptions"> </datalist>
+            <span class="error-Message" id="errorMessage"
+              >Enter valid city name</span
+            >
+          </div>
+          <div class="earth grey-shade">
+            <a href="https://earth.google.com/web/@0,0,0a,22251752.77375655d,35y,0h,0t,0r" target="new"
+              ><img class="earth-icon" src="./assets/icons/my-icons/earth3.gif" alt="click on map"
+            /></a>
+          </div>
         </div>
-
-        
+        <!--Selected city's Current Time and Date-->
         <div class="time-date">
-            <div class="time">
-                <p>
-                    <span id="hr"></span>
-                    <span id="min"></span>
-                    <span id="seconds"></span>
-                    <img class="am-pm" src="" alt="AM/PM Icon" id="ampm">
-                </p>
-            </div>
-            
-            <div class="date" id="date">
-                
-            </div>
-        </div> 
-    </div>
+          <div class="time">
+            <p>
+              <span id="hr"></span>
+              <span id="min"></span>
+              <span id="seconds"></span>
+              <img class="am-pm" src="" alt="AM/PM Icon" id="ampm" />
+            </p>
+          </div>
+          <div class="date" id="date"></div>
+        </div>
+      </div>
 
-    <!--Weather Report Main Details-->
-    <div class="weather-details">
-            <div class="weather temp-cel">
-                <div>Temp &deg; C</div>
-                <div id="celcius"></div>
-            </div>
-            <div class="weather humidity">
-                <div>Humidity</div>
-                <div id="humidity"></div>
-            </div>
-            <div class="weather temp-fah">
-                <div>Temp F</div>
-                <div id="farenheit"></div>
-            </div>
-            <div class="weather precipitation">
-                <div>Precipitation</div>
-                <div id="precipitation"></div>
-            </div>
-    </div>
+      <!--Weather Report Main Details-->
+      <div class="weather-details">
+        <div class="weather temp-cel">
+          <div>Temp &deg; C</div>
+          <div id="celcius"></div>
+        </div>
+        <div class="weather humidity">
+          <div>Humidity</div>
+          <div id="humidity"></div>
+        </div>
+        <div class="weather temp-fah">
+          <div>Temp F</div>
+          <div id="farenheit"></div>
+        </div>
+        <div class="weather precipitation">
+          <div>Precipitation</div>
+          <div id="precipitation"></div>
+        </div>
+      </div>
 
-    <!--Timeline weather Report-->
-    <div class="timeline" id = "timeline">
-       
-    </div>
-    
-</section>
+      <!--Timeline weather Report-->
+      <div class="timeline" id="timeline"></div>
+    </section>
 
-
-<!--Middle Section-->
-
-<section class="middle-section">
-    <div class="mid-titlebar">
+    <!--Middle Section - User Preferred Cities Weather Details-->
+    <section class="middle-section">
+      <div class="mid-titlebar">
         <div class="mid-title">Top cities around world</div>
         <div class="mid-menu">
-            <div class="menu sunny" title="Sunny"><button class="sunny pref-btn"><img src="/./assets/icons/weather-icons/sunnyIcon.svg" alt="Sunny"></button></div>
-            <div class="menu snowflake" title="Snowflake"><button class="snowflake pref-btn"><img src="/./assets/icons/weather-icons/snowflakeIcon.svg" alt="Snow Flake"></button></div>
-            <div class="menu rainy" title="Rainy"><button class="rainy pref-btn"><img src="/./assets/icons/weather-icons/rainyIcon.svg" alt="Rainy"></button></div>
-            <div class="menu display-top">Display Top</div>
-            <div class="menu display-count"><input type="number" name="display-count" id="display-count" min="3" max="10"></div>
+          <div class="menu sunny" title="Sunny">
+            <button class="sunny pref-btn">
+              <img
+                src="/./assets/icons/weather-icons/sunnyIcon.svg"
+                alt="Sunny"
+              />
+            </button>
+          </div>
+          <div class="menu snowflake" title="Snowflake">
+            <button class="snowflake pref-btn">
+              <img
+                src="/./assets/icons/weather-icons/snowflakeIcon.svg"
+                alt="Snow Flake"
+              />
+            </button>
+          </div>
+          <div class="menu rainy" title="Rainy">
+            <button class="rainy pref-btn">
+              <img
+                src="/./assets/icons/weather-icons/rainyIcon.svg"
+                alt="Rainy"
+              />
+            </button>
+          </div>
+          <div class="menu display-top">Display Top</div>
+          <div class="menu display-count">
+            <input
+              type="number"
+              name="display-count"
+              id="display-count"
+              min="3"
+              max="10"
+            />
+          </div>
         </div>
-    </div>
-    
-    <div class="top-cities">
+      </div>
+
+      <div class="top-cities">
         <div class="arrow">
-            <button class="arrow-button" title="Previous Cities"><img src="/./assets/icons/general-icons/backwardArrow.svg" alt="backwardArrow"></button>
+          <button class="arrow-button" title="Previous Cities">
+            <img
+              src="/./assets/icons/general-icons/backwardArrow.svg"
+              alt="backwardArrow"
+            />
+          </button>
         </div>
         <div class="city-card-container">
-            
-            <div class="citycard">
-                <div class="card-row1">
-                    <div class="city">New Delhi</div>
-                    <div class="row1-right">
-                        <div class="weather-icon"><img src="/./assets/icons/weather-icons/sunnyIcon.svg" alt="SunnyIcon"></div>
-                        <div class="temp">25&deg; C</div>
-                    </div>
+          <div class="citycard">
+            <div class="card-row1">
+              <div class="city">New Delhi</div>
+              <div class="row1-right">
+                <div class="weather-icon">
+                  <img
+                    src="/./assets/icons/weather-icons/sunnyIcon.svg"
+                    alt="SunnyIcon"
+                  />
                 </div>
-                <div class="card-time">10:00 AM</div>
-                <div class="card-date">2-MAR-2020</div>
-                <div class="card-humidity"><img src="/./assets/icons/weather-icons/humidityIcon.svg" alt="HumidityIcon">53%</div>
-                <div class="card-precipitation"><img src="/./assets/icons/weather-icons/precipitationIcon.svg" alt="PrecipitationIcon">10%</div>
-                <div class="card-city-icon"><img src="/./assets/icons/city-icons/losangeles.svg" alt="City Icon"></div>
+                <div class="temp">25&deg; C</div>
+              </div>
             </div>
-            <div class="citycard">
-                <div class="card-row1">
-                    <div class="city">New Delhi</div>
-                    <div class="row1-right">
-                        <div class="weather-icon"><img src="/./assets/icons/weather-icons/sunnyIcon.svg" alt="SunnyIcon"></div>
-                        <div class="temp">25&deg; C</div>
-                    </div>
+            <div class="card-time">10:00 AM</div>
+            <div class="card-date">2-MAR-2020</div>
+            <div class="card-humidity">
+              <img
+                src="/./assets/icons/weather-icons/humidityIcon.svg"
+                alt="HumidityIcon"
+              />53%
+            </div>
+            <div class="card-precipitation">
+              <img
+                src="/./assets/icons/weather-icons/precipitationIcon.svg"
+                alt="PrecipitationIcon"
+              />10%
+            </div>
+            <div class="card-city-icon">
+              <img
+                src="/./assets/icons/city-icons/losangeles.svg"
+                alt="City Icon"
+              />
+            </div>
+          </div>
+          <div class="citycard">
+            <div class="card-row1">
+              <div class="city">New Delhi</div>
+              <div class="row1-right">
+                <div class="weather-icon">
+                  <img
+                    src="/./assets/icons/weather-icons/sunnyIcon.svg"
+                    alt="SunnyIcon"
+                  />
                 </div>
-                <div class="card-time">10:00 AM</div>
-                <div class="card-date">2-MAR-2020</div>
-                <div class="card-humidity"><img src="/./assets/icons/weather-icons/humidityIcon.svg" alt="HumidityIcon">53%</div>
-                <div class="card-precipitation"><img src="/./assets/icons/weather-icons/precipitationIcon.svg" alt="PrecipitationIcon">10%</div>
-                <div class="card-city-icon"><img src="/./assets/icons/city-icons/london.svg" alt="City Icon"></div>
+                <div class="temp">25&deg; C</div>
+              </div>
             </div>
-            <div class="citycard">
-                <div class="card-row1">
-                    <div class="city">New Delhi</div>
-                    <div class="row1-right">
-                        <div class="weather-icon"><img src="/./assets/icons/weather-icons/sunnyIcon.svg" alt="SunnyIcon"></div>
-                        <div class="temp">25&deg; C</div>
-                    </div>
+            <div class="card-time">10:00 AM</div>
+            <div class="card-date">2-MAR-2020</div>
+            <div class="card-humidity">
+              <img
+                src="/./assets/icons/weather-icons/humidityIcon.svg"
+                alt="HumidityIcon"
+              />53%
+            </div>
+            <div class="card-precipitation">
+              <img
+                src="/./assets/icons/weather-icons/precipitationIcon.svg"
+                alt="PrecipitationIcon"
+              />10%
+            </div>
+            <div class="card-city-icon">
+              <img
+                src="/./assets/icons/city-icons/london.svg"
+                alt="City Icon"
+              />
+            </div>
+          </div>
+          <div class="citycard">
+            <div class="card-row1">
+              <div class="city">New Delhi</div>
+              <div class="row1-right">
+                <div class="weather-icon">
+                  <img
+                    src="/./assets/icons/weather-icons/sunnyIcon.svg"
+                    alt="SunnyIcon"
+                  />
                 </div>
-                <div class="card-time">10:00 AM</div>
-                <div class="card-date">2-MAR-2020</div>
-                <div class="card-humidity"><img src="/./assets/icons/weather-icons/humidityIcon.svg" alt="HumidityIcon">53%</div>
-                <div class="card-precipitation"><img src="/./assets/icons/weather-icons/precipitationIcon.svg" alt="PrecipitationIcon">10%</div>
-                <div class="card-city-icon"><img src="/./assets/icons/city-icons/newyork.svg" alt="City Icon"></div>
+                <div class="temp">25&deg; C</div>
+              </div>
             </div>
-            <div class="citycard">
-                <div class="card-row1">
-                    <div class="city">New Delhi</div>
-                    <div class="row1-right">
-                        <div class="weather-icon"><img src="/./assets/icons/weather-icons/sunnyIcon.svg" alt="SunnyIcon"></div>
-                        <div class="temp">25&deg; C</div>
-                    </div>
+            <div class="card-time">10:00 AM</div>
+            <div class="card-date">2-MAR-2020</div>
+            <div class="card-humidity">
+              <img
+                src="/./assets/icons/weather-icons/humidityIcon.svg"
+                alt="HumidityIcon"
+              />53%
+            </div>
+            <div class="card-precipitation">
+              <img
+                src="/./assets/icons/weather-icons/precipitationIcon.svg"
+                alt="PrecipitationIcon"
+              />10%
+            </div>
+            <div class="card-city-icon">
+              <img
+                src="/./assets/icons/city-icons/newyork.svg"
+                alt="City Icon"
+              />
+            </div>
+          </div>
+          <div class="citycard">
+            <div class="card-row1">
+              <div class="city">New Delhi</div>
+              <div class="row1-right">
+                <div class="weather-icon">
+                  <img
+                    src="/./assets/icons/weather-icons/sunnyIcon.svg"
+                    alt="SunnyIcon"
+                  />
                 </div>
-                <div class="card-time">10:00 AM</div>
-                <div class="card-date">2-MAR-2020</div>
-                <div class="card-humidity"><img src="/./assets/icons/weather-icons/humidityIcon.svg" alt="HumidityIcon">53%</div>
-                <div class="card-precipitation"><img src="/./assets/icons/weather-icons/precipitationIcon.svg" alt="PrecipitationIcon">10%</div>
-                <div class="card-city-icon"><img src="/./assets/icons/city-icons/vienna.svg" alt="City Icon"></div>
+                <div class="temp">25&deg; C</div>
+              </div>
             </div>
-            <div class="citycard">
-                <div class="card-row1">
-                    <div class="city">New Delhi</div>
-                    <div class="row1-right">
-                        <div class="weather-icon"><img src="/./assets/icons/weather-icons/sunnyIcon.svg" alt="SunnyIcon"></div>
-                        <div class="temp">25&deg; C</div>
-                    </div>
+            <div class="card-time">10:00 AM</div>
+            <div class="card-date">2-MAR-2020</div>
+            <div class="card-humidity">
+              <img
+                src="/./assets/icons/weather-icons/humidityIcon.svg"
+                alt="HumidityIcon"
+              />53%
+            </div>
+            <div class="card-precipitation">
+              <img
+                src="/./assets/icons/weather-icons/precipitationIcon.svg"
+                alt="PrecipitationIcon"
+              />10%
+            </div>
+            <div class="card-city-icon">
+              <img
+                src="/./assets/icons/city-icons/vienna.svg"
+                alt="City Icon"
+              />
+            </div>
+          </div>
+          <div class="citycard">
+            <div class="card-row1">
+              <div class="city">New Delhi</div>
+              <div class="row1-right">
+                <div class="weather-icon">
+                  <img
+                    src="/./assets/icons/weather-icons/sunnyIcon.svg"
+                    alt="SunnyIcon"
+                  />
                 </div>
-                <div class="card-time">10:00 AM</div>
-                <div class="card-date">2-MAR-2020</div>
-                <div class="card-humidity"><img src="/./assets/icons/weather-icons/humidityIcon.svg" alt="HumidityIcon">53%</div>
-                <div class="card-precipitation"><img src="/./assets/icons/weather-icons/precipitationIcon.svg" alt="PrecipitationIcon">10%</div>
-                <div class="card-city-icon"><img src="/./assets/icons/city-icons/london.svg" alt="City Icon"></div>
+                <div class="temp">25&deg; C</div>
+              </div>
             </div>
-            <div class="citycard">
-                <div class="card-row1">
-                    <div class="city">New Delhi</div>
-                    <div class="row1-right">
-                        <div class="weather-icon"><img src="/./assets/icons/weather-icons/sunnyIcon.svg" alt="SunnyIcon"></div>
-                        <div class="temp">25&deg; C</div>
-                    </div>
+            <div class="card-time">10:00 AM</div>
+            <div class="card-date">2-MAR-2020</div>
+            <div class="card-humidity">
+              <img
+                src="/./assets/icons/weather-icons/humidityIcon.svg"
+                alt="HumidityIcon"
+              />53%
+            </div>
+            <div class="card-precipitation">
+              <img
+                src="/./assets/icons/weather-icons/precipitationIcon.svg"
+                alt="PrecipitationIcon"
+              />10%
+            </div>
+            <div class="card-city-icon">
+              <img
+                src="/./assets/icons/city-icons/london.svg"
+                alt="City Icon"
+              />
+            </div>
+          </div>
+          <div class="citycard">
+            <div class="card-row1">
+              <div class="city">New Delhi</div>
+              <div class="row1-right">
+                <div class="weather-icon">
+                  <img
+                    src="/./assets/icons/weather-icons/sunnyIcon.svg"
+                    alt="SunnyIcon"
+                  />
                 </div>
-                <div class="card-time">10:00 AM</div>
-                <div class="card-date">2-MAR-2020</div>
-                <div class="card-humidity"><img src="/./assets/icons/weather-icons/humidityIcon.svg" alt="HumidityIcon">53%</div>
-                <div class="card-precipitation"><img src="/./assets/icons/weather-icons/precipitationIcon.svg" alt="PrecipitationIcon">10%</div>
-                <div class="card-city-icon"><img src="/./assets/icons/city-icons/london.svg" alt="City Icon"></div>
+                <div class="temp">25&deg; C</div>
+              </div>
             </div>
-
-        
+            <div class="card-time">10:00 AM</div>
+            <div class="card-date">2-MAR-2020</div>
+            <div class="card-humidity">
+              <img
+                src="/./assets/icons/weather-icons/humidityIcon.svg"
+                alt="HumidityIcon"
+              />53%
+            </div>
+            <div class="card-precipitation">
+              <img
+                src="/./assets/icons/weather-icons/precipitationIcon.svg"
+                alt="PrecipitationIcon"
+              />10%
+            </div>
+            <div class="card-city-icon">
+              <img
+                src="/./assets/icons/city-icons/london.svg"
+                alt="City Icon"
+              />
+            </div>
+          </div>
         </div>
         <div class="arrow forward">
-            <button class="arrow-button" title="Next Cities"><img src="/./assets/icons/general-icons/forwardArrow.svg" alt="forwardArrow"></button>
+          <button class="arrow-button" title="Next Cities">
+            <img
+              src="/./assets/icons/general-icons/forwardArrow.svg"
+              alt="forwardArrow"
+            />
+          </button>
         </div>
-    </div>
-</section>
+      </div>
+    </section>
 
-<section class="bottom-section">
-
-    <div class="bottom-header">
+    <!--Bottom Section - Sortable Cities by Continent and Temperatures-->
+    <section class="bottom-section">
+      <div class="bottom-header">
         <div class="bottom-title">Cities across continents at a Glance</div>
         <div class="bottom-controls">
-            <div>Continent Name</div>
-            <button class="arrowbtn" title="Sort According to Continent name"><img src="/./assets/icons/general-icons/arrowUp.svg" alt="Up Arrow icon"></button>
-            <div>Temperature</div>
-            <button class="arrowbtn" title="Sort According to Temperature of the Cities"><img src="/./assets/icons/general-icons/arrowDown.svg" alt="Down Arrow icon"></button>
+          <div>Continent Name</div>
+          <button class="arrowbtn" title="Sort According to Continent name">
+            <img
+              src="/./assets/icons/general-icons/arrowUp.svg"
+              alt="Up Arrow icon"
+            />
+          </button>
+          <div>Temperature</div>
+          <button
+            class="arrowbtn"
+            title="Sort According to Temperature of the Cities"
+          >
+            <img
+              src="/./assets/icons/general-icons/arrowDown.svg"
+              alt="Down Arrow icon"
+            />
+          </button>
         </div>
-    </div>
-        
-    <div class="bottom-container">
+      </div>
 
+      <div class="bottom-container">
         <div class="bottom-card">
-            <div class="b-continent">Asia</div>
-            <div class="b-temp">38&deg;C</div>
-            <div class="b-citytime">
-                <div class="b-city">Delhi,</div>
-                <div class="b-time">10:10 AM</div>
-            </div>
-            <div class="b-humidity">
-                <span><img src="/./assets/icons/weather-icons/humidityIcon.svg" alt="Humidity Icon"></span>
-                <span>53%</span>
-            </div>
-        </div>
-
-        <div class="bottom-card">
-            <div class="b-continent">Asia</div>
-            <div class="b-temp">38&deg;C</div>
-            <div class="b-citytime">
-                <div class="b-city">Delhi,</div>
-                <div class="b-time">10:10 AM</div>
-            </div>
-            <div class="b-humidity">
-                <span><img src="/./assets/icons/weather-icons/humidityIcon.svg" alt="Humidity Icon"></span>
-                <span>53%</span>
-            </div>
-        </div>
-
-        <div class="bottom-card">
-            <div class="b-continent">Asia</div>
-            <div class="b-temp">38&deg;C</div>
-            <div class="b-citytime">
-                <div class="b-city">Delhi,</div>
-                <div class="b-time">10:10 AM</div>
-            </div>
-            <div class="b-humidity">
-                <span><img src="/./assets/icons/weather-icons/humidityIcon.svg" alt="Humidity Icon"></span>
-                <span>53%</span>
-            </div>
+          <div class="b-continent">Asia</div>
+          <div class="b-temp">38&deg;C</div>
+          <div class="b-citytime">
+            <div class="b-city">Delhi,</div>
+            <div class="b-time">10:10 AM</div>
+          </div>
+          <div class="b-humidity">
+            <span
+              ><img
+                src="/./assets/icons/weather-icons/humidityIcon.svg"
+                alt="Humidity Icon"
+            /></span>
+            <span>53%</span>
+          </div>
         </div>
 
         <div class="bottom-card">
-            <div class="b-continent">Asia</div>
-            <div class="b-temp">38&deg;C</div>
-            <div class="b-citytime">
-                <div class="b-city">Delhi,</div>
-                <div class="b-time">10:10 AM</div>
-            </div>
-            <div class="b-humidity">
-                <span><img src="/./assets/icons/weather-icons/humidityIcon.svg" alt="Humidity Icon"></span>
-                <span>53%</span>
-            </div>
+          <div class="b-continent">Asia</div>
+          <div class="b-temp">38&deg;C</div>
+          <div class="b-citytime">
+            <div class="b-city">Delhi,</div>
+            <div class="b-time">10:10 AM</div>
+          </div>
+          <div class="b-humidity">
+            <span
+              ><img
+                src="/./assets/icons/weather-icons/humidityIcon.svg"
+                alt="Humidity Icon"
+            /></span>
+            <span>53%</span>
+          </div>
         </div>
 
         <div class="bottom-card">
-            <div class="b-continent">Asia</div>
-            <div class="b-temp">38&deg;C</div>
-            <div class="b-citytime">
-                <div class="b-city">Delhi,</div>
-                <div class="b-time">10:10 AM</div>
-            </div>
-            <div class="b-humidity">
-                <span><img src="/./assets/icons/weather-icons/humidityIcon.svg" alt="Humidity Icon"></span>
-                <span>53%</span>
-            </div>
+          <div class="b-continent">Asia</div>
+          <div class="b-temp">38&deg;C</div>
+          <div class="b-citytime">
+            <div class="b-city">Delhi,</div>
+            <div class="b-time">10:10 AM</div>
+          </div>
+          <div class="b-humidity">
+            <span
+              ><img
+                src="/./assets/icons/weather-icons/humidityIcon.svg"
+                alt="Humidity Icon"
+            /></span>
+            <span>53%</span>
+          </div>
         </div>
 
         <div class="bottom-card">
-            <div class="b-continent">Asia</div>
-            <div class="b-temp">38&deg;C</div>
-            <div class="b-citytime">
-                <div class="b-city">Delhi,</div>
-                <div class="b-time">10:10 AM</div>
-            </div>
-            <div class="b-humidity">
-                <span><img src="/./assets/icons/weather-icons/humidityIcon.svg" alt="Humidity Icon"></span>
-                <span>53%</span>
-            </div>
+          <div class="b-continent">Asia</div>
+          <div class="b-temp">38&deg;C</div>
+          <div class="b-citytime">
+            <div class="b-city">Delhi,</div>
+            <div class="b-time">10:10 AM</div>
+          </div>
+          <div class="b-humidity">
+            <span
+              ><img
+                src="/./assets/icons/weather-icons/humidityIcon.svg"
+                alt="Humidity Icon"
+            /></span>
+            <span>53%</span>
+          </div>
         </div>
 
         <div class="bottom-card">
-            <div class="b-continent">Asia</div>
-            <div class="b-temp">38&deg;C</div>
-            <div class="b-citytime">
-                <div class="b-city">Delhi,</div>
-                <div class="b-time">10:10 AM</div>
-            </div>
-            <div class="b-humidity">
-                <span><img src="/./assets/icons/weather-icons/humidityIcon.svg" alt="Humidity Icon"></span>
-                <span>53%</span>
-            </div>
+          <div class="b-continent">Asia</div>
+          <div class="b-temp">38&deg;C</div>
+          <div class="b-citytime">
+            <div class="b-city">Delhi,</div>
+            <div class="b-time">10:10 AM</div>
+          </div>
+          <div class="b-humidity">
+            <span
+              ><img
+                src="/./assets/icons/weather-icons/humidityIcon.svg"
+                alt="Humidity Icon"
+            /></span>
+            <span>53%</span>
+          </div>
         </div>
 
         <div class="bottom-card">
-            <div class="b-continent">Asia</div>
-            <div class="b-temp">38&deg;C</div>
-            <div class="b-citytime">
-                <div class="b-city">Delhi,</div>
-                <div class="b-time">10:10 AM</div>
-            </div>
-            <div class="b-humidity">
-                <span><img src="/./assets/icons/weather-icons/humidityIcon.svg" alt="Humidity Icon"></span>
-                <span>53%</span>
-            </div>
+          <div class="b-continent">Asia</div>
+          <div class="b-temp">38&deg;C</div>
+          <div class="b-citytime">
+            <div class="b-city">Delhi,</div>
+            <div class="b-time">10:10 AM</div>
+          </div>
+          <div class="b-humidity">
+            <span
+              ><img
+                src="/./assets/icons/weather-icons/humidityIcon.svg"
+                alt="Humidity Icon"
+            /></span>
+            <span>53%</span>
+          </div>
         </div>
 
         <div class="bottom-card">
-            <div class="b-continent">Asia</div>
-            <div class="b-temp">38&deg;C</div>
-            <div class="b-citytime">
-                <div class="b-city">Delhi,</div>
-                <div class="b-time">10:10 AM</div>
-            </div>
-            <div class="b-humidity">
-                <span><img src="/./assets/icons/weather-icons/humidityIcon.svg" alt="Humidity Icon"></span>
-                <span>53%</span>
-            </div>
+          <div class="b-continent">Asia</div>
+          <div class="b-temp">38&deg;C</div>
+          <div class="b-citytime">
+            <div class="b-city">Delhi,</div>
+            <div class="b-time">10:10 AM</div>
+          </div>
+          <div class="b-humidity">
+            <span
+              ><img
+                src="/./assets/icons/weather-icons/humidityIcon.svg"
+                alt="Humidity Icon"
+            /></span>
+            <span>53%</span>
+          </div>
         </div>
 
         <div class="bottom-card">
-            <div class="b-continent">Asia</div>
-            <div class="b-temp">38&deg;C</div>
-            <div class="b-citytime">
-                <div class="b-city">Delhi,</div>
-                <div class="b-time">10:10 AM</div>
-            </div>
-            <div class="b-humidity">
-                <span><img src="/./assets/icons/weather-icons/humidityIcon.svg" alt="Humidity Icon"></span>
-                <span>53%</span>
-            </div>
+          <div class="b-continent">Asia</div>
+          <div class="b-temp">38&deg;C</div>
+          <div class="b-citytime">
+            <div class="b-city">Delhi,</div>
+            <div class="b-time">10:10 AM</div>
+          </div>
+          <div class="b-humidity">
+            <span
+              ><img
+                src="/./assets/icons/weather-icons/humidityIcon.svg"
+                alt="Humidity Icon"
+            /></span>
+            <span>53%</span>
+          </div>
         </div>
 
         <div class="bottom-card">
-            <div class="b-continent">Asia</div>
-            <div class="b-temp">38&deg;C</div>
-            <div class="b-citytime">
-                <div class="b-city">Delhi,</div>
-                <div class="b-time">10:10 AM</div>
-            </div>
-            <div class="b-humidity">
-                <span><img src="/./assets/icons/weather-icons/humidityIcon.svg" alt="Humidity Icon"></span>
-                <span>53%</span>
-            </div>
+          <div class="b-continent">Asia</div>
+          <div class="b-temp">38&deg;C</div>
+          <div class="b-citytime">
+            <div class="b-city">Delhi,</div>
+            <div class="b-time">10:10 AM</div>
+          </div>
+          <div class="b-humidity">
+            <span
+              ><img
+                src="/./assets/icons/weather-icons/humidityIcon.svg"
+                alt="Humidity Icon"
+            /></span>
+            <span>53%</span>
+          </div>
         </div>
 
         <div class="bottom-card">
-            <div class="b-continent">Asia</div>
-            <div class="b-temp">38&deg;C</div>
-            <div class="b-citytime">
-                <div class="b-city">Delhi,</div>
-                <div class="b-time">10:10 AM</div>
-            </div>
-            <div class="b-humidity">
-                <span><img src="/./assets/icons/weather-icons/humidityIcon.svg" alt="Humidity Icon"></span>
-                <span>53%</span>
-            </div>
+          <div class="b-continent">Asia</div>
+          <div class="b-temp">38&deg;C</div>
+          <div class="b-citytime">
+            <div class="b-city">Delhi,</div>
+            <div class="b-time">10:10 AM</div>
+          </div>
+          <div class="b-humidity">
+            <span
+              ><img
+                src="/./assets/icons/weather-icons/humidityIcon.svg"
+                alt="Humidity Icon"
+            /></span>
+            <span>53%</span>
+          </div>
         </div>
 
-           
-            <!--  FLIP CARD 
+        <div class="bottom-card">
+          <div class="b-continent">Asia</div>
+          <div class="b-temp">38&deg;C</div>
+          <div class="b-citytime">
+            <div class="b-city">Delhi,</div>
+            <div class="b-time">10:10 AM</div>
+          </div>
+          <div class="b-humidity">
+            <span
+              ><img
+                src="/./assets/icons/weather-icons/humidityIcon.svg"
+                alt="Humidity Icon"
+            /></span>
+            <span>53%</span>
+          </div>
+        </div>
+
+        <div class="bottom-card">
+          <div class="b-continent">Asia</div>
+          <div class="b-temp">38&deg;C</div>
+          <div class="b-citytime">
+            <div class="b-city">Delhi,</div>
+            <div class="b-time">10:10 AM</div>
+          </div>
+          <div class="b-humidity">
+            <span
+              ><img
+                src="/./assets/icons/weather-icons/humidityIcon.svg"
+                alt="Humidity Icon"
+            /></span>
+            <span>53%</span>
+          </div>
+        </div>
+
+        <!--  FLIP CARD 
 
             <div class="bottom-card">
                 <div class="flipcard">
@@ -382,10 +595,7 @@
                 </div>
             </div>
              -->
-        
-    </div>
-</section>
-
-
-</body>
+      </div>
+    </section>
+  </body>
 </html>

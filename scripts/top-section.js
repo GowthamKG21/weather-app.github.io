@@ -32,7 +32,7 @@ jsonData.then(function (data) {
   let intervalID;
   let whrVal;
   let previousCity;
-  cityinput.setAttribute("temp", "");
+  cityinput.setAttribute("previous", "");
 
   // Hourly weather - Timeline  
   function hourlyWeather(whrVal, wtempVal, index, length) {
@@ -59,12 +59,15 @@ jsonData.then(function (data) {
     if (wtempVal >= 29) {
       wImg = createImage("./assets/icons/weather-icons/sunnyIconBlack.svg", "SunnyIcon");
     }
+    if (wtempVal == "Nil") {
+      let weather = ["cloudy", "humidity", "precipitation", "rainy", "snowflake", "sunny", "windy"];
+      wImg = createImage("./assets/icons/weather-icons/" + weather[Math.floor(Math.random() * weather.length)] + "Icon.svg", "WeatherIcon");
+    }
     createElementWithClassAppend('div', "w w-icon", wImg, tBox);
     createElementWithClassAppend('div', "w w-value", wtempVal, tBox);
     if (index != length - 1) {
       createElementWithClassAppend('div', "w w-time-separator", "|", tBox);
     }
-
   }
 
   // For displaying city options in DataList Input 
@@ -85,7 +88,7 @@ jsonData.then(function (data) {
       previousCity = cityObj;
       cityinput.style.border = "none";
       cityinput.style.textDecoration = "none";
-      document.getElementById("validateMsg").style.display = "none";
+      document.getElementById("errorMessage").style.display = "none";
 
       // City Icon
       let cityname = cityObj.cityName.toLowerCase();
@@ -109,20 +112,54 @@ jsonData.then(function (data) {
         precip.innerHTML = "<strong>" + precipVal.slice(0, precipVal.length - 1) + "</strong>" + precipVal[precipVal.length - 1];
         // Hourly Weather Timeline 
         timeline.innerHTML = "";
+        for (let i = 0; i < whrVal; i++) {
+          hourlyWeather(i, "Nil", i, 4);
+        }
         hourlyWeather("NOW", parseInt(cityObj.temperature.slice(0, cityObj.temperature.length - 1)));
         whrVal++;
         for (let temp of cityObj.nextFiveHrs) {
-          whrVal = (whrVal == 24) ? 0 : whrVal;
+          // whrVal = (whrVal == 24) ? 0 : whrVal;
           let wtempVal = parseInt(temp.slice(0, temp.length - 1));
           hourlyWeather(whrVal, wtempVal, cityObj.nextFiveHrs.indexOf(temp), cityObj.nextFiveHrs.length);
           whrVal++;
+        }
+        for (let i = whrVal; i < 24; i++) {
+          hourlyWeather(whrVal++, "Nil", i, 24);
         }
       }
       intervalID = setInterval(clockRun, 1000);
     }
     else {
       cityinput.style.border = "2px solid red";
-      document.getElementById("validateMsg").style.display = "block";
+      document.getElementById("errorMessage").style.display = "block";
+      if (intervalID) {
+        clearInterval(intervalID);
+      }
+      (() => {
+
+        // City Options Input
+        cityicon.src = `../assets/icons/city-icons/alt-city-icon.png`;
+        ampm.src = "./assets/icons/general-icons/amState.svg";
+        let d = new Date();
+        let inputTimeZone = d.timeZone;
+        whrVal = clock(inputTimeZone, hr, min, sec, ampm, cityDate, "top");
+
+        // Main Weather Report
+        cel.innerHTML = "<strong>&UnderBar;&UnderBar;  &deg; </strong>";
+        hum.innerHTML = "<strong>&UnderBar;&UnderBar; </strong> %";
+        fah.innerHTML = "<strong>&UnderBar;&UnderBar;  F</strong>";
+        precip.innerHTML = "<strong>&UnderBar;&UnderBar; </strong> %";
+
+        // Hourly Weather Timeline 
+        timeline.innerHTML = "";
+        hourlyWeather("NOW", "Nil");
+        let hrVal = d.getHours();
+        for (let i = 0; i < 4; i++) {
+          if (hrVal == 24) { hrVal = 0; }
+          hourlyWeather(hrVal++, "Nil", i, 4);
+        }
+
+      })();
     }
 
   }
@@ -130,7 +167,6 @@ jsonData.then(function (data) {
   // To switch back to previous selected city
   cityinput.addEventListener("focusout", displayPrevious);
   function displayPrevious() {
-    console.log("pre: " + previousCity.cityName);
     cityinput.value = previousCity.cityName;
     display();
   }
@@ -138,7 +174,7 @@ jsonData.then(function (data) {
   // To display all city names
   cityinput.addEventListener("click", displayAll);
   function displayAll() {
-    this.temp = this.value;
+    this.previous = this.value;
     this.value = "";
   }
 
