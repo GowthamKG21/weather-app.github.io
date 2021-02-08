@@ -170,7 +170,7 @@
 }
 
 .b-humidity > span img{
-    width: calc(100% / 4);
+    width: 1rem;
 }
 
 
