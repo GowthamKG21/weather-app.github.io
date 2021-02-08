@@ -1,4 +1,6 @@
 "use strict";
+// clock Module contains display functions for time and date 
+import { clock } from './clock.js';
 
 // initializeJSON module contains function that return JSON Object
 import { initializeJSON } from './initialize-json.js';
