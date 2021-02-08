@@ -126,4 +126,51 @@ jsonData.then(function (data) {
       if (sortType == "Temp") { displayCard(newCityArray[i]); }
     }
   }
+
+  /**
+   * Returns a City Card with values of passed City Obj
+   * @param {object} cityObj City Object  
+   */
+  function displayCard(cityObj) {
+    // Continent Name
+    let contCity = cityObj.timeZone.split("/");
+    let bCard = createElementWithClassAppend("div", "bottom-card", "", bContainer);
+    createElementWithClassAppend("div", "b-continent", contCity[0], bCard);
+
+    // Temperature
+    createElementWithClassAppend("div", "b-temp", cityObj.temperature, bCard);
+
+    // City Time and City Name
+    let bCityTime = createElementWithClassAppend("div", "b-citytime", "", bCard);
+    createElementWithClassAppend("div", "b-city", `${cityObj.cityName},&nbsp;`, bCityTime);
+    time();
+    humidity();
+
+    /**
+     * Updates Current Time of the city
+     */
+    function time() {
+      let bTime = createElementWithClassAppend("div", "b-time", "", bCityTime);
+      let hr = createElementWithClassAppend('span', "", "", bTime);
+      let min = createElementWithClassAppend('span', "", " &colon; ", bTime);
+      let sec;
+      let ampmSpan = createElementWithClassAppend('span', "", "", bTime);
+      let cityDate;
+      setInterval(() => { clock(cityObj.timeZone, hr, min, sec, ampmSpan, cityDate, "bottom"); }, 1000);
+    }
+
+    /**
+     * Updates Humidity Value of the city
+     */
+    function humidity() {
+      let bHumidity = createElementWithClassAppend("div", "b-humidity", "", bCard);
+      let humidityImage = createImage("/./assets/icons/weather-icons/humidityIcon.svg", "Humidity Icon");
+      createElementWithClassAppend("span", "", humidityImage, bHumidity);
+      createElementWithClassAppend("span", "", ` ${cityObj.humidity}`, bHumidity);
+    }
+  }
+
+  // Triggers Event Programatically for initial display while loading
+  var event = new Event('click');
+  sortByContinent.dispatchEvent(event);
 })
