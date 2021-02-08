@@ -1,4 +1,8 @@
 "use strict";
+
+// Utilities  module contains createElement functions
+import { createElementWithClassAppend, createImage } from './utilities.js';
+
 // clock Module contains display functions for time and date 
 import { clock } from './clock.js';
 
