@@ -1,1 +1,1 @@
-"use strict";
+import "./top-section.js";

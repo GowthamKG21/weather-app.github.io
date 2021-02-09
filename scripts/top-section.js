@@ -34,7 +34,13 @@ jsonData.then(function (data) {
   let previousCity;
   cityinput.setAttribute("previous", "");
 
-  // Hourly weather - Timeline  
+  /**
+   * Displays Hourly Weather - Timeline
+   * @param {number} whrVal Hour
+   * @param {number} wtempVal Temperature value
+   * @param {number} index index of temperature value in array
+   * @param {number} length Length of the array
+   */
   function hourlyWeather(whrVal, wtempVal, index, length) {
     let tBox = createElementWithClassAppend('div', "timeline-hr-container", "", timeline);
     if (whrVal != "NOW") {
@@ -70,7 +76,7 @@ jsonData.then(function (data) {
     }
   }
 
-  // For displaying city options in DataList Input 
+  // Displays city options in DataList Input 
   let citylistArray = Object.keys(data);
   for (let city of citylistArray) {
     let option = document.createElement('option');
@@ -78,7 +84,7 @@ jsonData.then(function (data) {
     cityoptions.appendChild(option);
   }
 
-  // If correct city name is given
+  // When user gives a valid City name
   cityinput.addEventListener("input", display);
   function display() {
     let cityObj = data[cityinput.value.toLowerCase()];
@@ -112,29 +118,39 @@ jsonData.then(function (data) {
         precip.innerHTML = "<strong>" + precipVal.slice(0, precipVal.length - 1) + "</strong>" + precipVal[precipVal.length - 1];
         // Hourly Weather Timeline 
         timeline.innerHTML = "";
+        /*
+        * This code might be needed in future
         for (let i = 0; i < whrVal; i++) {
           hourlyWeather(i, "Nil", i, 4);
         }
+        */
         hourlyWeather("NOW", parseInt(cityObj.temperature.slice(0, cityObj.temperature.length - 1)));
         whrVal++;
         for (let temp of cityObj.nextFiveHrs) {
-          // whrVal = (whrVal == 24) ? 0 : whrVal;
+          whrVal = (whrVal == 24) ? 0 : whrVal;
           let wtempVal = parseInt(temp.slice(0, temp.length - 1));
           hourlyWeather(whrVal, wtempVal, cityObj.nextFiveHrs.indexOf(temp), cityObj.nextFiveHrs.length);
           whrVal++;
         }
+        /*
+        * This code might be needed in future
         for (let i = whrVal; i < 24; i++) {
           hourlyWeather(whrVal++, "Nil", i, 24);
         }
+        */
       }
       intervalID = setInterval(clockRun, 1000);
     }
     else {
+      // when input City name is invalid
       cityinput.style.border = "2px solid red";
       document.getElementById("errorMessage").style.display = "block";
       if (intervalID) {
         clearInterval(intervalID);
       }
+      /**
+       * Replaces values of the city with underscore
+       */
       (() => {
 
         // City Options Input
@@ -164,15 +180,19 @@ jsonData.then(function (data) {
 
   }
 
-  // To switch back to previous selected city
   cityinput.addEventListener("focusout", displayPrevious);
+  /**
+   * switch back to previous selected city 
+   */
   function displayPrevious() {
     cityinput.value = previousCity.cityName;
     display();
   }
 
-  // To display all city names
   cityinput.addEventListener("click", displayAll);
+  /**
+   * Displays all city names
+   */
   function displayAll() {
     this.previous = this.value;
     this.value = "";
