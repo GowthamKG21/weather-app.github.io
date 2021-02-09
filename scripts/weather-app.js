@@ -1,1 +1,1 @@
-"use strict";
+import "./middle-section.js";

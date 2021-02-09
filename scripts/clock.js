@@ -1,9 +1,20 @@
 "use strict";
 
-// Clock and Date
+/**
+ * To Display Time and Date based on City's TimeZone
+ * @param {Object} cityobj city Object of JSON
+ * @param {Object} hr HTML element for Hours  
+ * @param {Object} min HTML element for Minutes 
+ * @param {object} sec HTML element for Seconds 
+ * @param {Object} ampm HTML element for AM/PM 
+ * @param {Object} displayDate HTML element for Date
+ * @param {String} place Section(Location) of these elements in HTML  
+ * @return {number} hours - Current Hour in 24HRS format
+ */
 export function clock(cityobj, hr, min, sec, ampm, displayDate, place) {
     let localdate = new Date();
     let newDate;
+    // If undefined object then Local Timezone is taken
     if (cityobj == "undefined") {
         newDate = new Date();
     }
@@ -19,16 +30,19 @@ export function clock(cityobj, hr, min, sec, ampm, displayDate, place) {
     minutes = addZeroPrefix(minutes);
     seconds = addZeroPrefix(seconds);
 
+    /**
+     * Add Zero as prefix to single digit minutes and seconds
+     * @param {number} i Minutes or Seconds 
+     */
     function addZeroPrefix(i) {
-        if (i < 10) { i = "0" + i };  // add zero in front of numbers < 10
+        if (i < 10) { i = "0" + i };
         return i;
     }
 
     // Hours
     hr.innerHTML = (function () {
-        if (hours == 0) { return 12; }
-        else if (hours > 12) { return hours % 12; }
-        else { return hours; }
+        if (hours > 12) { return hours % 12; }
+        else { return h; }
     })();
 
     // Minutes
@@ -41,6 +55,7 @@ export function clock(cityobj, hr, min, sec, ampm, displayDate, place) {
 
     // AM_PM
     if (hours < 12) {
+        // To display image for AM/PM for Top Section only
         if (place != "middle" && place != "bottom") {
             ampm.src = "./assets/icons/general-icons/amState.svg";
         }
@@ -49,6 +64,7 @@ export function clock(cityobj, hr, min, sec, ampm, displayDate, place) {
         }
     }
     else {
+        // To display image for AM/PM for Top Section only
         if (place != "middle" && place != "bottom") {
             ampm.src = "./assets/icons/general-icons/pmState.svg";
         }
@@ -60,12 +76,13 @@ export function clock(cityobj, hr, min, sec, ampm, displayDate, place) {
     // Date
     if (place != "bottom") {
         let dateStr = newDate.toLocaleDateString();
-        let dateArray = dateStr.split("/");
+        let dateArr = dateStr.split("/");
         const months = [
             'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
             'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-        let mon = dateArray[0];
-        displayDate.innerHTML = `${dateArray[1]}-${months[mon - 1]}-${dateArray[2]}`;
+        let mon = dateArr[0];
+        displayDate.innerHTML = `${dateArr[1]}-${months[mon - 1]}-${dateArr[2]}`;
     }
+
     return hours;
 }
