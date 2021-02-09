@@ -10,7 +10,7 @@ let jsonData = initializeJSON();
 // Clock Module contains displaying time and date 
 import { clock } from './clock.js';
 
-// Scroll arrows for middle section city card container
+// DOM elements for Scroll arrows(Back,Next) of middle section city card container
 let middleContainer = document.getElementById("middleContainer");
 middleContainer.style.scrollBehavior = "smooth";
 let scrollBtn = document.getElementsByClassName("arrow-button");
@@ -24,6 +24,9 @@ scrollNext.addEventListener('click', () => {
 	middleContainer.scrollLeft += 250;
 });
 
+/**
+ * To Display Scroll Buttons if City Container overflows
+ */
 function checkScroll() {
 	let ele = middleContainer;
 	let isOverflowing = ele.scrollWidth == ele.clientWidth;
@@ -36,7 +39,6 @@ function checkScroll() {
 		scrollBtn[1].style.display = "block";
 	}
 }
-setInterval(checkScroll, 1000);
 
 jsonData.then(function (data) {
 	// Adding Event Listeners to User Preference Selectors 
@@ -49,55 +51,97 @@ jsonData.then(function (data) {
 	let displayCount = document.getElementById("displayCount");
 	displayCount.addEventListener("input", function () { displayTopCities(this.value); });
 
-	// Method for creating Card for City
+	/**
+	 * Creates and Displays City Card
+	 * @param {object} city City Object 
+	 * @param {string} wIconName current weather of the city
+	 */
 	function createCard(city, wIconName) {
+		// City Card
 		let cityBox = createElementWithClassAppend('div', "citycard", "", middleContainer);
+
+		// City Name
 		let cardRow1 = createElementWithClassAppend('div', "card-row1", "", cityBox);
 		createElementWithClassAppend('div', "city", city.cityName, cardRow1);
-		let row1Right = createElementWithClassAppend('div', "row1-right", "", cardRow1);
 
-		let wImg = createImage(`./assets/icons/weather-icons/${wIconName}Icon.svg`, "CloudyIcon");
-		createElementWithClassAppend('div', "weather-icon", wImg, row1Right);
+		Temperature();
 
-		createElementWithClassAppend('div', "temp", city.temperature, row1Right);
-
-		let cityTime = createElementWithClassAppend('div', "card-time textStrong", "", cityBox);
-		let cityDate = createElementWithClassAppend('div', "card-date", "", cityBox);
-
-		let hr = createElementWithClassAppend('span', "", "", cityTime);
-		let min = createElementWithClassAppend('span', "", " &colon; ", cityTime);
-		let sec;
-
-		let ampmSpan = createElementWithClassAppend('span', "", "", cityTime);
-
+		let { hr, min, sec, ampmSpan, cityDate } = Time();
 		setInterval(function () { clock(city.timeZone, hr, min, sec, ampmSpan, cityDate, "middle"); }, 1000);
 
-		let humIcon = createImage("./assets/icons/weather-icons/humidityIcon.svg", "HumidityIcon");
-		let cityHumidity = createElementWithClassAppend('div', "card-humidity", humIcon, cityBox);
-		createElementWithClassAppend('span', "", city.humidity, cityHumidity);
+		humidity();
+		precipitation();
+		cityIcon();
 
-		let precipIcon = createImage("./assets/icons/weather-icons/precipitationIcon.svg", "PrecipitationIcon");
-		let cityPrecipitation = createElementWithClassAppend('div', "card-precipitation", precipIcon, cityBox);
-		createElementWithClassAppend('span', "", city.precipitation, cityPrecipitation);
+		/**
+		 * Displays Weather Icon and Temperature Value of the city
+		 */
+		function Temperature() {
+			let row1Right = createElementWithClassAppend('div', "row1-right", "", cardRow1);
+			let wImg = createImage(`./assets/icons/weather-icons/${wIconName}Icon.svg`, "CloudyIcon");
+			createElementWithClassAppend('div', "weather-icon", wImg, row1Right);
+			createElementWithClassAppend('div', "temp", city.temperature, row1Right);
+		}
 
-		let cityname = city.cityName.toLowerCase();
-		let cityImg = createImage(`../assets/icons/city-icons/${cityname}.svg`, "cityIcon");
-		createElementWithClassAppend('div', "card-city-icon", cityImg, cityBox);
+		/**
+		 * Current Time of the city
+		 */
+		function Time() {
+			let cityTime = createElementWithClassAppend('div', "card-time textStrong", "", cityBox);
+			let cityDate = createElementWithClassAppend('div', "card-date", "", cityBox);
+			let hr = createElementWithClassAppend('span', "", "", cityTime);
+			let min = createElementWithClassAppend('span', "", " &colon; ", cityTime);
+			let sec;
+			let ampmSpan = createElementWithClassAppend('span', "", "", cityTime);
+			return { hr, min, sec, ampmSpan, cityDate };
+		}
+
+		/**
+		 * Displays Humidity Icon and Value of the City
+		 */
+		function humidity() {
+			let humIcon = createImage("./assets/icons/weather-icons/humidityIcon.svg", "HumidityIcon");
+			let cityHumidity = createElementWithClassAppend('div', "card-humidity", humIcon, cityBox);
+			createElementWithClassAppend('span', "", city.humidity, cityHumidity);
+		}
+
+		/**
+		 * Displays Precipitation Icon and Value of the city
+		 */
+		function precipitation() {
+			let precipIcon = createImage("./assets/icons/weather-icons/precipitationIcon.svg", "PrecipitationIcon");
+			let cityPrecipitation = createElementWithClassAppend('div', "card-precipitation", precipIcon, cityBox);
+			createElementWithClassAppend('span', "", city.precipitation, cityPrecipitation);
+		}
+
+		/**
+		 * Displays Icon of the City
+		 */
+		function cityIcon() {
+			let cityname = city.cityName.toLowerCase();
+			let cityImg = createImage(`../assets/icons/city-icons/${cityname}.svg`, "cityIcon");
+			createElementWithClassAppend('div', "card-city-icon", cityImg, cityBox);
+		}
 	}
 
 	let selectedCities = [];
 
-	// Function for choosing which cities need to displayed in city Container
+	/**
+	 * Chooses which cities need to displayed in city Container
+	 * @param {string} pref_weather User Selected Weather name 
+	 */
 	function cityContainer(pref_weather) {
 		middleContainer.innerHTML = "";
 		let citylistArray = Object.keys(data);
-		// For clearing the array elements - Previous selected cities
 		selectedCities = [];
 
+		// Selects cities based on user selected weather
 		for (let city of citylistArray) {
+			// Temperature, Humidity and Precipitation Value of the city
 			let temp = parseInt(data[city].temperature.slice(0, data[city].temperature.length - 2));
 			let hum = parseInt(data[city].humidity.slice(0, data[city].humidity.length - 1));
 			let precip = parseInt(data[city].precipitation.slice(0, data[city].precipitation.length - 1));
+
 			switch (pref_weather) {
 				case "Sunny": if (temp > 29 && hum < 50 && precip >= 50) {
 					selectedCities.push({ city: data[city], wval: temp, wname: "sunny" });
@@ -120,6 +164,10 @@ jsonData.then(function (data) {
 		displayTopCities(3);
 	}
 
+	/**
+	 * Limits count of the cities to be Displayed by User Input
+	 * @param {number} count Number of cities to be displayed
+	 */
 	function displayTopCities(count) {
 		middleContainer.innerHTML = "";
 		if (count > 10) {
@@ -135,9 +183,13 @@ jsonData.then(function (data) {
 		displayCities.forEach(function (item) {
 			createCard(item.city, item.wname);
 		});
+		checkScroll();
 	}
 
-	// Toggle Button Mode for user preference selector weather
+	/**
+	 * Selects Weather for Displaying cities
+	 * @param {string} btn Weather name(sunny / Snowy / Rainy) 
+	 */
 	function toggleBtn(btn) {
 		switch (btn) {
 			case "Sunny": sunnyBtn.style.borderBottom = "2px solid var(--light-blue-border)";
@@ -160,7 +212,7 @@ jsonData.then(function (data) {
 		}
 	}
 
-	//Triggering Event Programatically
+	// Sunny Weather by default while loading(Triggers Event)
 	var event = new Event('click');
 	sunnyBtn.dispatchEvent(event);
 })
