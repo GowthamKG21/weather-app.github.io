@@ -41,8 +41,8 @@
     max-width: 100%;
 }
 
-.city-list>input {
-    max-width: 15rem;
+.city-list > input {
+    max-width: 18rem;
     max-height: 5rem;
     background-color: var(--bg-input-box);
     border: none;
@@ -53,6 +53,20 @@
     font-size: 2.5rem;
     padding: 1rem;
     margin-left: 1rem;
+    text-decoration: none;
+}
+
+.city-list {
+    display: flex;
+    flex-direction: column;
+    max-height: 5rem;
+    box-sizing: border-box;
+}
+
+.error-Message {
+    color: red;
+    text-align: center;
+    display: none;
 }
 
 .city-list::-webkit-calendar-picker-indicator {
@@ -61,11 +75,23 @@
     color: var(--secondary-white);
 }
 
+.earth {
+    display: flex;
+    align-self: center;
+    justify-self: center;
+    cursor: pointer;
+}
+.earth-icon {
+    width: 4rem;
+    background-color: rgba(var(--light-blue-border),0.8);
+    border-radius: 100%;
+}
+
 .time{
     color: var(--pale-yellow-text); 
 }
 
-#hr-min{
+#hr, #min{
     font-size: 2rem;
 }
 
@@ -122,6 +148,8 @@
     font-weight: 100;
     font-size: 1.3rem;    
     overflow: scroll;
+    width: 40rem;
+    box-sizing: border-box;
     -ms-overflow-style: none;  /* IE and Edge */
     scrollbar-width: none;  /* Firefox */
 }
@@ -234,6 +262,7 @@
     .timeline {
         font-size: 1rem;
         overflow: hidden;
+        justify-content: center;
     } 
 
     .timeline-hr-container {
