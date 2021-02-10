@@ -43,10 +43,12 @@
     outline: none;
 }
 
+/*
+//Dynamically done by js
 .pref-btn:focus{
     border-bottom: 2px solid var(--light-blue-border);
 }
-
+*/
 .sunny > img ,.snowflake > img {
     animation: roll 10s infinite;
 }
@@ -107,6 +109,8 @@
     cursor: pointer;
 }
 
+
+
 .arrow-button{
     border: none;
     border-radius: 50%;
@@ -121,15 +125,39 @@
 }
 
 .arrow-button:hover{
-    box-shadow: 0px 0px 7px 10px var(--bg-grey-tile);
     width: 3.7rem;
     height: 3.7rem;
+    animation-name: waves;
+    animation-duration: 0.7s;
+    animation-iteration-count: infinite; 
+    outline: 1px solid var(--primary-black);
+    
+}
+
+@keyframes waves {
+    0% {
+        box-shadow: 0px 0px 0px 5px var(--bg-grey-tile);
+        outline-offset: 0px;
+    }
+    25% {
+        box-shadow: 0px 0px 3px 8px var(--bg-grey-tile);
+        outline-offset: 2px;
+    }
+    50% {
+        box-shadow: 0px 0px 6px 10px var(--bg-grey-tile);
+        outline-offset: 4px;
+    }
+    100% {
+        box-shadow: 0px 0px 8px 15px var(--bg-grey-tile);
+        outline-offset: 8px;
+    }
 }
 
 .arrow-button > img{
     width: 2.5rem; 
     align-self: center;
 }
+
 
 .forward{
     justify-self: right;
