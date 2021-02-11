@@ -53,8 +53,9 @@ export function displayTime(timeZoneValue, hrElement, minElement, secElement, am
     }
 
     // Hours
-    hrElement.innerHTML = (function () {
-        if (hours > 12) { return hours % 12; }
+    hrElement.innerHTML = (function () { 
+        if (hours == 0) { return 12; }
+        else if (hours > 12) { return hours % 12; }
         else { return hours; }
     })();
 

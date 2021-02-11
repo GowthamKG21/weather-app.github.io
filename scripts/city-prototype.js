@@ -29,7 +29,7 @@ export function CityTemplate(cityObj) {
  */
 CityTemplate.prototype.getTemperatureValue = function (celcius) {
     if (celcius == undefined) { celcius = this.temperature; }
-    return parseInt(celcius.slice(0, celcius.length - 1));
+    return parseInt(celcius.slice(0, celcius.length - 2));
 };
 
 /**

@@ -1,5 +1,8 @@
 "use strict";
 
+// City Prototype Module for city objects
+import { CityTemplate } from './city-prototype.js';
+
 // Utilities  module contains createElement functions
 import { createElementWithClassAppend, createImage } from './utilities.js';
 
@@ -7,8 +10,8 @@ import { createElementWithClassAppend, createImage } from './utilities.js';
 import { initializeJSON } from './initialize-json.js';
 let jsonData = initializeJSON();
 
-// Clock Module contains displaying time and date 
-import { clock } from './clock.js';
+// Clock Module for time and date 
+import { displayDate, displayTime } from './clock.js';
 
 // DOM elements for Scroll arrows(Back,Next) of middle section city card container
 let middleContainer = document.getElementById("middleContainer");
@@ -56,18 +59,31 @@ jsonData.then(function (data) {
 	 * @param {object} city City Object 
 	 * @param {string} wIconName current weather of the city
 	 */
-	function createCard(city, wIconName) {
+	function createCard(City, wIconName) {
 		// City Card
 		let cityBox = createElementWithClassAppend('div', "citycard", "", middleContainer);
 
 		// City Name
 		let cardRow1 = createElementWithClassAppend('div', "card-row1", "", cityBox);
-		createElementWithClassAppend('div', "city", city.cityName, cardRow1);
+		createElementWithClassAppend('div', "city", City.cityName, cardRow1);
 
 		Temperature();
 
-		let { hr, min, sec, ampmSpan, cityDate } = Time();
-		setInterval(function () { clock(city.timeZone, hr, min, sec, ampmSpan, cityDate, "middle"); }, 1000);
+		/**
+		 * Current Time of the city
+		 */
+		let cityTime = createElementWithClassAppend('div', "card-time textStrong", "", cityBox);
+		let cityDate = createElementWithClassAppend('div', "card-date", "", cityBox);
+		let hr = createElementWithClassAppend('span', "", "", cityTime);
+		let min = createElementWithClassAppend('span', "", " &colon; ", cityTime);
+		let sec;
+		let ampmSpan = createElementWithClassAppend('span', "", "", cityTime);
+
+		function clockRun() {
+			displayTime(City.timeZone, hr, min, sec, ampmSpan, "text");
+			displayDate(City.timeZone, cityDate);
+		}
+		setInterval(clockRun(), 1000);
 
 		humidity();
 		precipitation();
@@ -80,20 +96,7 @@ jsonData.then(function (data) {
 			let row1Right = createElementWithClassAppend('div', "row1-right", "", cardRow1);
 			let wImg = createImage(`./assets/icons/weather-icons/${wIconName}Icon.svg`, "CloudyIcon");
 			createElementWithClassAppend('div', "weather-icon", wImg, row1Right);
-			createElementWithClassAppend('div', "temp", city.temperature, row1Right);
-		}
-
-		/**
-		 * Current Time of the city
-		 */
-		function Time() {
-			let cityTime = createElementWithClassAppend('div', "card-time textStrong", "", cityBox);
-			let cityDate = createElementWithClassAppend('div', "card-date", "", cityBox);
-			let hr = createElementWithClassAppend('span', "", "", cityTime);
-			let min = createElementWithClassAppend('span', "", " &colon; ", cityTime);
-			let sec;
-			let ampmSpan = createElementWithClassAppend('span', "", "", cityTime);
-			return { hr, min, sec, ampmSpan, cityDate };
+			createElementWithClassAppend('div', "temp", City.temperature, row1Right);
 		}
 
 		/**
@@ -102,7 +105,7 @@ jsonData.then(function (data) {
 		function humidity() {
 			let humIcon = createImage("./assets/icons/weather-icons/humidityIcon.svg", "HumidityIcon");
 			let cityHumidity = createElementWithClassAppend('div', "card-humidity", humIcon, cityBox);
-			createElementWithClassAppend('span', "", city.humidity, cityHumidity);
+			createElementWithClassAppend('span', "", City.humidity, cityHumidity);
 		}
 
 		/**
@@ -111,15 +114,14 @@ jsonData.then(function (data) {
 		function precipitation() {
 			let precipIcon = createImage("./assets/icons/weather-icons/precipitationIcon.svg", "PrecipitationIcon");
 			let cityPrecipitation = createElementWithClassAppend('div', "card-precipitation", precipIcon, cityBox);
-			createElementWithClassAppend('span', "", city.precipitation, cityPrecipitation);
+			createElementWithClassAppend('span', "", City.precipitation, cityPrecipitation);
 		}
 
 		/**
 		 * Displays Icon of the City
 		 */
 		function cityIcon() {
-			let cityname = city.cityName.toLowerCase();
-			let cityImg = createImage(`../assets/icons/city-icons/${cityname}.svg`, "cityIcon");
+			let cityImg = createImage(City.cityIconSrc, City.cityName);
 			createElementWithClassAppend('div', "card-city-icon", cityImg, cityBox);
 		}
 	}
@@ -137,24 +139,26 @@ jsonData.then(function (data) {
 
 		// Selects cities based on user selected weather
 		for (let city of citylistArray) {
+			let City = new CityTemplate(data[city]);
+
 			// Temperature, Humidity and Precipitation Value of the city
-			let temp = parseInt(data[city].temperature.slice(0, data[city].temperature.length - 2));
-			let hum = parseInt(data[city].humidity.slice(0, data[city].humidity.length - 1));
-			let precip = parseInt(data[city].precipitation.slice(0, data[city].precipitation.length - 1));
+			let temp = City.getTemperatureValue();
+			let hum = City.getHumidityValue();
+			let precip = City.getPrecipitationValue();
 
 			switch (pref_weather) {
 				case "Sunny": if (temp > 29 && hum < 50 && precip >= 50) {
-					selectedCities.push({ city: data[city], wval: temp, wname: "sunny" });
+					selectedCities.push({ city: City, wval: temp, wname: "sunny" });
 				}
 					break;
 
 				case "snowy": if ((temp > 20 && temp < 28) && hum > 50 && precip < 50) {
-					selectedCities.push({ city: data[city], wval: temp, wname: "snowflake" });
+					selectedCities.push({ city: City, wval: temp, wname: "snowflake" });
 				}
 					break;
 
 				case "Rainy": if (temp < 20 && hum >= 50) {
-					selectedCities.push({ city: data[city], wval: temp, wname: "rainy" });
+					selectedCities.push({ city: City, wval: temp, wname: "rainy" });
 				}
 					break;
 			}
@@ -216,6 +220,3 @@ jsonData.then(function (data) {
 	var event = new Event('click');
 	sunnyBtn.dispatchEvent(event);
 })
-
-
-
