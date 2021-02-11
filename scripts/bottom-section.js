@@ -1,10 +1,13 @@
 "use strict";
 
+// City Prototype Module for city objects
+import { CityTemplate } from './city-prototype.js';
+
 // Utilities  module contains createElement functions
 import { createElementWithClassAppend, createImage } from './utilities.js';
 
-// clock Module contains display functions for time and date 
-import { clock } from './clock.js';
+// Clock Module for time and date 
+import { displayTime } from './clock.js';
 
 // initializeJSON module contains function that return JSON Object
 import { initializeJSON } from './initialize-json.js';
@@ -26,7 +29,7 @@ jsonData.then(function (data) {
   SortByTemperatureArrow.src = "/./assets/icons/general-icons/arrowDown.svg";
   SortByTemperatureArrow.alt = "Down Arrow Icon";
 
-  // Bottom City Card Container
+  // Container for Bottom City Cards
   let bContainer = document.getElementById("bottomContainer");
 
   // Array to store all city objects from JSON Object
@@ -132,17 +135,20 @@ jsonData.then(function (data) {
    * @param {object} cityObj City Object  
    */
   function displayCard(cityObj) {
+    let City = new CityTemplate(cityObj);
+
     // Continent Name
-    let contCity = cityObj.timeZone.split("/");
+    let contCity = City.timeZone.split("/");
     let bCard = createElementWithClassAppend("div", "bottom-card", "", bContainer);
     createElementWithClassAppend("div", "b-continent", contCity[0], bCard);
 
     // Temperature
-    createElementWithClassAppend("div", "b-temp", cityObj.temperature, bCard);
+    createElementWithClassAppend("div", "b-temp", City.temperature, bCard);
 
     // City Time and City Name
     let bCityTime = createElementWithClassAppend("div", "b-citytime", "", bCard);
-    createElementWithClassAppend("div", "b-city", `${cityObj.cityName},&nbsp;`, bCityTime);
+    createElementWithClassAppend("div", "b-city", `${City.cityName},&nbsp;`, bCityTime);
+
     time();
     humidity();
 
@@ -155,8 +161,8 @@ jsonData.then(function (data) {
       let min = createElementWithClassAppend('span', "", " &colon; ", bTime);
       let sec;
       let ampmSpan = createElementWithClassAppend('span', "", "", bTime);
-      let cityDate;
-      setInterval(() => { clock(cityObj.timeZone, hr, min, sec, ampmSpan, cityDate, "bottom"); }, 1000);
+
+      setInterval(() => { displayTime(City.timeZone, hr, min, sec, ampmSpan, "Text"); }, 1000);
     }
 
     /**
@@ -166,7 +172,7 @@ jsonData.then(function (data) {
       let bHumidity = createElementWithClassAppend("div", "b-humidity", "", bCard);
       let humidityImage = createImage("/./assets/icons/weather-icons/humidityIcon.svg", "Humidity Icon");
       createElementWithClassAppend("span", "", humidityImage, bHumidity);
-      createElementWithClassAppend("span", "", ` ${cityObj.humidity}`, bHumidity);
+      createElementWithClassAppend("span", "", ` ${City.humidity}`, bHumidity);
     }
   }
 
