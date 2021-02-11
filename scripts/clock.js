@@ -1,32 +1,45 @@
 "use strict";
 
 /**
- * To Display Time and Date based on City's TimeZone
- * @param {Object} cityobj city Object of JSON
- * @param {Object} hr HTML element for Hours  
- * @param {Object} min HTML element for Minutes 
- * @param {object} sec HTML element for Seconds 
- * @param {Object} ampm HTML element for AM/PM 
- * @param {Object} displayDate HTML element for Date
- * @param {String} place Section(Location) of these elements in HTML  
- * @return {number} hours - Current Hour in 24HRS format
+ * Returns Date based on TimeZone
+ * @param {string} timeZoneValue timeZone Name
+ * @returns {object} date object
  */
-export function clock(cityobj, hr, min, sec, ampm, displayDate, place) {
-    let localdate = new Date();
-    let newDate;
-    // If undefined object then Local Timezone is taken
-    if (cityobj == "undefined") {
-        newDate = new Date();
+export function getDateByTimeZone(timeZoneValue) {
+    let date = new Date();
+    // If timeZoneValue is undefined then Local Timezone is taken
+    if (timeZoneValue != "undefined") {
+        let dateString = date.toLocaleString('en-US', { timeZone: timeZoneValue });
+        date = new Date(dateString);
     }
-    else {
-        let inputTimezone = cityobj;
-        let newDateString = localdate.toLocaleString('en-US', { timeZone: inputTimezone });
-        newDate = new Date(newDateString);
-    }
+    return date;
+}
 
-    let hours = newDate.getHours();
-    let minutes = newDate.getMinutes();
-    let seconds = newDate.getSeconds();
+/**
+ * Returns Hour value based on TimeZone
+ * @param {string} timeZoneValue timeZone Name
+ * @returns {number} Hours Value
+ */
+export function getHourValue(timeZoneValue) {
+    let date = getDateByTimeZone(timeZoneValue);
+    return date.getHours();
+}
+
+/**
+ * Displays Time based on timeZone of the city on given HTML Elements
+ * @param {string} timeZoneValue timeZone Name
+ * @param {Object} hrElement HTML element for Hours  
+ * @param {Object} minElement HTML element for Minutes 
+ * @param {object} secElement HTML element for Seconds 
+ * @param {Object} ampmElement HTML element for AM/PM 
+ * @param {String} ampmType how to display AM/PM (Image or Text)
+ */
+export function displayTime(timeZoneValue, hrElement, minElement, secElement, ampmElement, ampmType) {
+    let date = getDateByTimeZone(timeZoneValue);
+
+    let hours = date.getHours();
+    let minutes = date.getMinutes();
+    let seconds = date.getSeconds();
     minutes = addZeroPrefix(minutes);
     seconds = addZeroPrefix(seconds);
 
@@ -40,49 +53,48 @@ export function clock(cityobj, hr, min, sec, ampm, displayDate, place) {
     }
 
     // Hours
-    hr.innerHTML = (function () {
+    hrElement.innerHTML = (function () {
         if (hours > 12) { return hours % 12; }
         else { return hours; }
     })();
 
     // Minutes
-    min.innerHTML = " &colon; " + minutes;
+    minElement.innerHTML = " &colon; " + minutes;
 
     // Seconds
-    if (place != "middle" && place != "bottom") {
-        sec.innerHTML = " &colon; " + seconds;
+    if (secElement != undefined) {
+        secElement.innerHTML = " &colon; " + seconds;
     }
 
     // AM_PM
     if (hours < 12) {
-        // To display image for AM/PM for Top Section only
-        if (place != "middle" && place != "bottom") {
-            ampm.src = "./assets/icons/general-icons/amState.svg";
+        if (ampmType == "Image") {
+            ampmElement.src = "./assets/icons/general-icons/amState.svg";
+            ampmElement.title = "AM Icon";
         }
-        else {
-            ampm.innerHTML = ' AM';
-        }
+        else { ampmElement.innerHTML = ' AM'; }
     }
     else {
-        // To display image for AM/PM for Top Section only
-        if (place != "middle" && place != "bottom") {
-            ampm.src = "./assets/icons/general-icons/pmState.svg";
+        if (ampmType == "Image") {
+            ampmElement.src = "./assets/icons/general-icons/pmState.svg";
+            ampmElement.title = "PM Icon";
         }
-        else {
-            ampm.innerHTML = ' PM';
-        }
+        else { ampmElement.innerHTML = ' PM'; }
     }
+}
 
-    // Date
-    if (place != "bottom") {
-        let dateStr = newDate.toLocaleDateString();
-        let dateArr = dateStr.split("/");
-        const months = [
-            'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-            'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-        let mon = dateArr[0];
-        displayDate.innerHTML = `${dateArr[1]}-${months[mon - 1]}-${dateArr[2]}`;
-    }
-
-    return hours;
+/**
+ * Displays date based on timeZone in given HTML Element
+ * @param {string} timeZoneValue timeZone Name
+ * @param {object} dateElement HTML Element where date need to be displayed
+ */
+export function displayDate(timeZoneValue, dateElement) {
+    let date = getDateByTimeZone(timeZoneValue);
+    let dateString = date.toLocaleDateString();
+    let dateArray = dateString.split("/");
+    const months = [
+        'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+        'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    let mon = dateArray[0];
+    dateElement.innerHTML = `${dateArray[1]}-${months[mon - 1]}-${dateArray[2]}`;
 }
