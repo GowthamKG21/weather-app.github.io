@@ -94,7 +94,7 @@ CityTemplate.prototype.weatherForecast = function (container) {
         }
         createElementWithClassAppend('div', "w w-icon", wImg, Box);
         createElementWithClassAppend('div', "w w-value", tempValue, Box);
-        if (end == true) {
+        if (end != true) {
             createElementWithClassAppend('div', "w w-time-separator", "|", Box);
         }
     }
