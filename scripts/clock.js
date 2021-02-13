@@ -35,29 +35,10 @@ export function getHourValue(timeZoneValue) {
  * @param {String} ampmType how to display AM/PM (Image or Text)
  */
 export function displayTime(timeZoneValue, hrElement, minElement, secElement, ampmElement, ampmType) {
-    let date = getDateByTimeZone(timeZoneValue);
-
-    let hours = date.getHours();
-    let minutes = date.getMinutes();
-    let seconds = date.getSeconds();
-    minutes = addZeroPrefix(minutes);
-    seconds = addZeroPrefix(seconds);
-
-    /**
-     * Add Zero as prefix to single digit minutes and seconds
-     * @param {number} i Minutes or Seconds 
-     */
-    function addZeroPrefix(i) {
-        if (i < 10) { i = "0" + i };
-        return i;
-    }
+    let [hours, twelveHours, minutes, seconds] = getTimeValues(timeZoneValue);
 
     // Hours
-    hrElement.innerHTML = (function () { 
-        if (hours == 0) { return 12; }
-        else if (hours > 12) { return hours % 12; }
-        else { return hours; }
-    })();
+    hrElement.innerHTML = twelveHours;
 
     // Minutes
     minElement.innerHTML = " &colon; " + minutes;
@@ -98,4 +79,50 @@ export function displayDate(timeZoneValue, dateElement) {
         'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
     let mon = dateArray[0];
     dateElement.innerHTML = `${dateArray[1]}-${months[mon - 1]}-${dateArray[2]}`;
+}
+
+/**
+ * Returns time 
+ * @param {string} timeZoneValue timeZone Name
+ * @returns {Array} [hours, twelveHours, minutes, seconds] 
+ */
+function getTimeValues(timeZoneValue) {
+    let date = getDateByTimeZone(timeZoneValue);
+
+    let hours = date.getHours();
+    let minutes = date.getMinutes();
+    let seconds = date.getSeconds();
+    minutes = addZeroPrefix(minutes);
+    seconds = addZeroPrefix(seconds);
+
+    /**
+     * Add Zero as prefix to single digit minutes and seconds
+     * @param {number} i Minutes or Seconds 
+     */
+    function addZeroPrefix(i) {
+        if (i < 10) { i = "0" + i };
+        return i;
+    }
+    // Hours
+    let twelveHours = (function () {
+        if (hours == 0) { return 12; }
+        else if (hours > 12) { return hours % 12; }
+        else { return hours; }
+    })();
+
+    return [hours, twelveHours, minutes, seconds];
+}
+
+/**
+ * Returns String of format "mm/dd/yyyy, h:mm:ss AMPM, cityName"
+ * @param {string} timeZoneValue timeZone Name
+ * @returns {string} 
+ */
+export function getDateTime(timeZoneValue) {
+    let date = getDateByTimeZone(timeZoneValue);
+    let dateString = `${date.getMonth()}/${date.getDate()}/${date.getFullYear()}`;
+    let [hours, twelveHours, minutes, seconds] = getTimeValues(timeZoneValue);
+    let ampm = (hours < 12) ? ' AM' : ' PM';
+    let timeString = `${twelveHours}:${minutes}:${seconds}${ampm}`;
+    return `${dateString}, ${timeString}`;
 }

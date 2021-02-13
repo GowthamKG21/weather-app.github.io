@@ -4,12 +4,13 @@
 import { CityTemplate } from './city-prototype.js';
 
 // Clock Module for time and date 
-import { displayDate, displayTime, getHourValue } from './clock.js';
+import { getDateTime, displayDate, displayTime, getHourValue } from './clock.js';
 
-// Initialize module contains JSON fetching
-import { initializeJSON } from './initialize-json.js';
-let jsonData = initializeJSON();
-jsonData.then(function (data) {
+// Request data using HTTP Request to Web API
+import { initializeData } from './http-request.js';
+
+let jsonData = initializeData();
+jsonData.then(function (citiesArray) {
 
   // DOM elements
   let cityInput = document.getElementById("cityInput");
@@ -33,10 +34,9 @@ jsonData.then(function (data) {
   let previousCity;
 
   // Displays city options in DataList Input 
-  let citylistArray = Object.keys(data);
-  for (let cityObject of citylistArray) {
+  for (let cityObject of citiesArray) {
     let option = document.createElement('option');
-    option.value = data[cityObject]['cityName'];
+    option.value = cityObject.cityName;
     cityOptionsDataList.appendChild(option);
     // console.log(cityOptionsDataList);
   }
@@ -47,9 +47,11 @@ jsonData.then(function (data) {
    * Updates the Top Section with Input City Values
    */
   function display() {
-    let cityObj = data[cityInput.value.toLowerCase()];
+    let cityObj = citiesArray.find(findInputCity);
+    function findInputCity(element) {
+      return element.cityName.toLowerCase() == cityInput.value.toLowerCase();
+    }
     // if it is not present in data,Then value = undefined
-
     if (typeof cityObj != "undefined") {
       previousCity = cityObj;
       let City = new CityTemplate(cityObj);
@@ -79,8 +81,9 @@ jsonData.then(function (data) {
       fah.innerHTML = "<strong>" + City.getFahrenheitValue() + "&nbsp; F" + "</strong>";
       precip.innerHTML = "<strong>" + City.getPrecipitationValue() + "</strong>" + "&nbsp; %";
 
+      let apiString = `${getDateTime(City.timeZone)}, ${City.cityName}`;
       // Weather Forecast
-      City.weatherForecast(timeline);
+      City.weatherForecast(timeline, apiString);
     }
     else {
       // when input City name is invalid

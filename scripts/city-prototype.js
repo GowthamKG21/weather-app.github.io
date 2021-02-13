@@ -1,5 +1,8 @@
 "use strict";
 
+// Request data using HTTP Request to Web API
+import { getNextHrsWeather } from './http-request.js';
+
 // Clock Module for time and date 
 import { getHourValue } from './clock.js';
 
@@ -18,7 +21,7 @@ export class CityTemplate {
         this.temperature = cityObj.temperature;
         this.humidity = cityObj.humidity;
         this.precipitation = cityObj.precipitation;
-        this.nextFiveHrs = cityObj.nextFiveHrs;
+
         this.hour = getHourValue(this.timeZone);
     }
     /**
@@ -35,7 +38,7 @@ export class CityTemplate {
      * Returns Fahrenheit Value of the city
      */
     getFahrenheitValue() {
-        return ((parseInt(this.temperature) * 1.8) + 32).toFixed(2);
+        return ((parseInt(this.temperature) * 1.8) + 32).toFixed(1);
     }
     /**
      * Returns Humidity Value of the city
@@ -53,7 +56,8 @@ export class CityTemplate {
      * Creates and Display Weather Forecast Timeline
      * @param {object} container HTML Element of the container
      */
-    weatherForecast(container) {
+    weatherForecast(container, apiString) {
+
         /**
          * Creates and Displays a Hourly Box in Timeline of weather Forecast
          * @param {number} hrValue Hour Value
@@ -97,23 +101,28 @@ export class CityTemplate {
 
         container.innerHTML = "";
         let end = false;
-        hourBox("NOW", this.getTemperatureValue(), end);
+        let start = true;
         let hrValue = this.hour;
-        hrValue++;
-        for (let t of this.nextFiveHrs) {
-            hrValue = (hrValue == 24) ? 0 : hrValue;
-            let tempValue = this.getTemperatureValue(t);
+        let apiData = getNextHrsWeather(apiString, 5);
+        apiData.then(function (data) {
+            let nextFiveHrs = data.temperature;
 
-            if (this.nextFiveHrs.indexOf(t) == (this.nextFiveHrs.length - 1)) { end = true; }
+            for (let t of nextFiveHrs) {
+                hrValue = (hrValue == 24) ? 0 : hrValue;
+                let tempValue = parseInt(t.slice(0, t.length - 2));
 
-            hourBox(hrValue, tempValue, end);
-            hrValue++;
-        }
+                if (start == true) {
+                    hourBox("NOW", tempValue, end);
+                    start = false;
+                }
+                else {
+                    hourBox(hrValue, tempValue, end);
+                }
+
+                if (nextFiveHrs.indexOf(t) == (nextFiveHrs.length - 2)) { end = true; }
+                hrValue++;
+            }
+        })
+
     }
 };
-
-
-
-
-
-
