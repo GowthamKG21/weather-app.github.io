@@ -5,12 +5,21 @@ let requestOptions = {
     redirect: 'follow'
 };
 
+let reloadFlagInitialize = 0;
+let reloadFlagNextWeather = 0;
 /**
  * Fetches the City, TimeZone and Weather details from web API
  */
 export async function initializeData() {
-    let response = await fetch("https://soliton.glitch.me/all-timezone-cities", requestOptions);
+    let response = await fetch("https://soliton.glitch.me/all-timezone-cities", requestOptions)
+    .catch((error) => { 
+        if (reloadFlagInitialize == 0) {
+            alert("Sorry ! Error in fetching City Details 😞\nPlease reload the site Or Try after sometime\n\n" + error)
+            reloadFlagInitialize++;
+        }
+    });
     let jsonData = await response.json();
+    reloadFlagInitialize = (typeof jsonData == undefined) ? reloadFlagInitialize : 1;
     return jsonData;
 }
 
@@ -32,7 +41,13 @@ export async function getNextHrsWeather(apiString, numberOfHrs) {
         redirect: 'follow'
     };
 
-    let response = await fetch("https://soliton.glitch.me/hourly-forecast", requestOptionsPost);
+    let response = await fetch("https://soliton.glitch.me/hourly-forecast", requestOptionsPost)
+    .catch((error) => { 
+        if (reloadFlagNextWeather == 0) {
+            alert("Sorry ! Could not fetch Houlry Forecast Details 😞\nPlease reload the site Or Try after sometime\n\n" + error)
+            reloadFlagNextWeather++;
+        }
+    });
     let nextWeather = await response.json();
     return nextWeather;
 }

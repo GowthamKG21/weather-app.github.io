@@ -147,12 +147,12 @@ jsonData.then(function (data) {
 			let precip = City.getPrecipitationValue();
 
 			switch (pref_weather) {
-				case "Sunny": if (temp > 29 && hum < 50 && precip >= 50) {
+				case "Sunny": if (temp >= 29 && hum < 50 && precip >= 50) {
 					selectedCities.push({ city: City, wval: temp, wname: "sunny" });
 				}
 					break;
 
-				case "snowy": if ((temp > 20 && temp < 28) && hum > 50 && precip < 50) {
+				case "snowy": if ((temp >= 20 && temp <= 28) && hum > 50 && precip < 50) {
 					selectedCities.push({ city: City, wval: temp, wname: "snowflake" });
 				}
 					break;
