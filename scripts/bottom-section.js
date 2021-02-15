@@ -9,10 +9,10 @@ import { createElementWithClassAppend, createImage } from './utilities.js';
 // Clock Module for time and date 
 import { displayTime } from './clock.js';
 
-// initializeJSON module contains function that return JSON Object
-import { initializeJSON } from './initialize-json.js';
+// Request data using HTTP Request to Web API
+import { initializeData } from './http-request.js';
 
-let jsonData = initializeJSON();
+let jsonData = initializeData();
 jsonData.then(function (data) {
   // DOM elements for Sort Arrow Icons
   let sortByContinent = document.getElementById("sortContinent");
