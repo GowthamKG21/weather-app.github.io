@@ -6,9 +6,9 @@ import { CityTemplate } from './city-prototype.js';
 // Utilities  module contains createElement functions
 import { createElementWithClassAppend, createImage } from './utilities.js';
 
-// Initialize module contains JSON fetching
-import { initializeJSON } from './initialize-json.js';
-let jsonData = initializeJSON();
+// Request data using HTTP Request to Web API
+import { initializeData } from './http-request.js';
+let jsonData = initializeData();
 
 // Clock Module for time and date 
 import { displayDate, displayTime } from './clock.js';
