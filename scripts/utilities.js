@@ -29,7 +29,7 @@ export function createElementWithClassAppend(type, className, content, parentEle
  */
 export function createImage(srclink, altname) {
     let img = document.createElement('img');
-    img.src = srclink;
+    img.src = `"${srclink}"`;
     img.alt = altname;
     return img;
 }
