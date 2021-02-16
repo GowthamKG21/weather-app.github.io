@@ -170,7 +170,7 @@ jsonData.then(function (data) {
      */
     function humidity() {
       let bHumidity = createElementWithClassAppend("div", "b-humidity", "", bCard);
-      let humidityImage = createImage("/./assets/icons/weather-icons/humidityIcon.svg", "Humidity Icon");
+      let humidityImage = createImage("./assets/icons/weather-icons/humidityIcon.svg", "Humidity Icon");
       createElementWithClassAppend("span", "", humidityImage, bHumidity);
       createElementWithClassAppend("span", "", ` ${City.humidity}`, bHumidity);
     }
