@@ -19,14 +19,14 @@ jsonData.then(function (data) {
   sortByContinent.addEventListener("click", () => { sortCity("Cont"); });
 
   let SortByContinentArrow = document.getElementById("sortContinentImg");
-  SortByContinentArrow.src = "/./assets/icons/general-icons/arrowDown.svg";
+  SortByContinentArrow.src = "./assets/icons/general-icons/arrowDown.svg";
   SortByContinentArrow.alt = "Down Arrow Icon";
 
   let sortByTemperature = document.getElementById("sortTemperature");
   sortByTemperature.addEventListener("click", () => { sortCity("Temp"); });
 
   let SortByTemperatureArrow = document.getElementById("sortTemperatureImg");
-  SortByTemperatureArrow.src = "/./assets/icons/general-icons/arrowDown.svg";
+  SortByTemperatureArrow.src = "./assets/icons/general-icons/arrowDown.svg";
   SortByTemperatureArrow.alt = "Down Arrow Icon";
 
   // Container for Bottom City Cards
@@ -96,13 +96,13 @@ jsonData.then(function (data) {
       if (contImgName == "Up Arrow Icon") {
         cityObjArray.sort(function (a, b) { return a.timeZone.localeCompare(b.timeZone) });
         sortByContinent.title = "Click to View Descending order of Continent Names";
-        SortByContinentArrow.src = "/./assets/icons/general-icons/arrowDown.svg";
+        SortByContinentArrow.src = "./assets/icons/general-icons/arrowDown.svg";
         SortByContinentArrow.alt = "Down Arrow Icon";
       }
       if (contImgName == "Down Arrow Icon") {
         cityObjArray.sort(function (a, b) { return b.timeZone.localeCompare(a.timeZone) });
         sortByContinent.title = "Click to View Ascending order of Continent Names";
-        SortByContinentArrow.src = "/./assets/icons/general-icons/arrowUp.svg";
+        SortByContinentArrow.src = "./assets/icons/general-icons/arrowUp.svg";
         SortByContinentArrow.alt = "Up Arrow Icon";
       }
     }
@@ -112,13 +112,13 @@ jsonData.then(function (data) {
       if (tempImgName == "Up Arrow Icon") {
         cityObjArray.forEach(checkSameContinent);
         sortByTemperature.title = "Click to View Descending order of City Temperatures";
-        SortByTemperatureArrow.src = "/./assets/icons/general-icons/arrowDown.svg";
+        SortByTemperatureArrow.src = "./assets/icons/general-icons/arrowDown.svg";
         SortByTemperatureArrow.alt = "Down Arrow Icon";
       }
       if (tempImgName == "Down Arrow Icon") {
         cityObjArray.forEach(checkSameContinent);
         sortByTemperature.title = "Click to View Ascending order of City Temperatures";
-        SortByTemperatureArrow.src = "/./assets/icons/general-icons/arrowUp.svg";
+        SortByTemperatureArrow.src = "./assets/icons/general-icons/arrowUp.svg";
         SortByTemperatureArrow.alt = "Up Arrow Icon";
       }
     }
