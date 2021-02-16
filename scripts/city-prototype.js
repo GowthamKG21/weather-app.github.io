@@ -16,7 +16,7 @@ import { createElementWithClassAppend, createImage } from './utilities.js';
 export class CityTemplate {
     constructor(cityObj) {
         this.cityName = cityObj.cityName;
-        this.cityIconSrc = `./assets/icons/city-icons/${this.cityName.toLowerCase()}.svg`;
+        this.cityIconSrc = `"./assets/icons/city-icons/${this.cityName.toLowerCase()}.svg"`;
         this.timeZone = cityObj.timeZone;
         this.temperature = cityObj.temperature;
         this.humidity = cityObj.humidity;
